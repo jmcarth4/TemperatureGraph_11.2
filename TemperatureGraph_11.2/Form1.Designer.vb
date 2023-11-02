@@ -37,7 +37,7 @@ Partial Class Form1
         '
         'QuitButton
         '
-        Me.QuitButton.Location = New System.Drawing.Point(692, 386)
+        Me.QuitButton.Location = New System.Drawing.Point(743, 438)
         Me.QuitButton.Name = "QuitButton"
         Me.QuitButton.Size = New System.Drawing.Size(96, 52)
         Me.QuitButton.TabIndex = 0
@@ -56,7 +56,7 @@ Partial Class Form1
         'MinLabel
         '
         Me.MinLabel.AutoSize = True
-        Me.MinLabel.Location = New System.Drawing.Point(715, 282)
+        Me.MinLabel.Location = New System.Drawing.Point(518, 454)
         Me.MinLabel.Name = "MinLabel"
         Me.MinLabel.Size = New System.Drawing.Size(34, 20)
         Me.MinLabel.TabIndex = 2
@@ -65,7 +65,7 @@ Partial Class Form1
         'MaxLabel
         '
         Me.MaxLabel.AutoSize = True
-        Me.MaxLabel.Location = New System.Drawing.Point(715, 326)
+        Me.MaxLabel.Location = New System.Drawing.Point(580, 453)
         Me.MaxLabel.Name = "MaxLabel"
         Me.MaxLabel.Size = New System.Drawing.Size(38, 20)
         Me.MaxLabel.TabIndex = 3
@@ -74,7 +74,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(728, 100)
+        Me.Label1.Location = New System.Drawing.Point(164, 446)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(46, 20)
         Me.Label1.TabIndex = 4
@@ -87,7 +87,7 @@ Partial Class Form1
         '
         'TempGButton
         '
-        Me.TempGButton.Location = New System.Drawing.Point(707, 42)
+        Me.TempGButton.Location = New System.Drawing.Point(41, 438)
         Me.TempGButton.Name = "TempGButton"
         Me.TempGButton.Size = New System.Drawing.Size(81, 36)
         Me.TempGButton.TabIndex = 5
@@ -96,7 +96,7 @@ Partial Class Form1
         '
         'ArrayButton
         '
-        Me.ArrayButton.Location = New System.Drawing.Point(675, 139)
+        Me.ArrayButton.Location = New System.Drawing.Point(237, 428)
         Me.ArrayButton.Name = "ArrayButton"
         Me.ArrayButton.Size = New System.Drawing.Size(113, 70)
         Me.ArrayButton.TabIndex = 6
@@ -106,7 +106,7 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(671, 221)
+        Me.Label2.Location = New System.Drawing.Point(376, 446)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(109, 20)
         Me.Label2.TabIndex = 7
@@ -116,7 +116,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(851, 497)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.ArrayButton)
         Me.Controls.Add(Me.TempGButton)

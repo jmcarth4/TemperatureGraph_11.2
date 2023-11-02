@@ -37,7 +37,7 @@
             PictureBox1.CreateGraphics.DrawLine(Pens.DarkSeaGreen, lastX, lastY, loopX, graphF)
             lastX = loopX
 
-            loopX += 1
+            loopX += (PictureBox1.Width / 96)
 
             lastY = tempF
         Loop
@@ -57,7 +57,7 @@
         lastY = 0
         Me.Refresh()
         For i = 0 To 95
-            Do Until loopX = 96
+            Do Until loopX = PictureBox1.Width
                 tempF = CInt((Rnd() * 100) + 32)
                 record(i) = tempF
                 Label1.Text = tempF
@@ -82,7 +82,7 @@
 
                 lastX = loopX
 
-                loopX += 1
+                loopX += (PictureBox1.Width / 96)
 
                 lastY = tempF
 
