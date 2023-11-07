@@ -39,6 +39,14 @@ Partial Class Form1
         Me.HBottomLabel = New System.Windows.Forms.Label()
         Me.ScaleLabel = New System.Windows.Forms.Label()
         Me.InvtertLabel = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.OffsetLabel = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.RangeLabel = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -81,7 +89,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(159, 323)
+        Me.Label1.Location = New System.Drawing.Point(223, 306)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(46, 20)
         Me.Label1.TabIndex = 4
@@ -103,7 +111,7 @@ Partial Class Form1
         '
         'ArrayButton
         '
-        Me.ArrayButton.Location = New System.Drawing.Point(244, 309)
+        Me.ArrayButton.Location = New System.Drawing.Point(335, 334)
         Me.ArrayButton.Name = "ArrayButton"
         Me.ArrayButton.Size = New System.Drawing.Size(113, 70)
         Me.ArrayButton.TabIndex = 6
@@ -113,7 +121,7 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(131, 403)
+        Me.Label2.Location = New System.Drawing.Point(223, 431)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(109, 20)
         Me.Label2.TabIndex = 7
@@ -167,7 +175,7 @@ Partial Class Form1
         'ScaleLabel
         '
         Me.ScaleLabel.AutoSize = True
-        Me.ScaleLabel.Location = New System.Drawing.Point(156, 375)
+        Me.ScaleLabel.Location = New System.Drawing.Point(223, 375)
         Me.ScaleLabel.Name = "ScaleLabel"
         Me.ScaleLabel.Size = New System.Drawing.Size(49, 20)
         Me.ScaleLabel.TabIndex = 13
@@ -176,17 +184,97 @@ Partial Class Form1
         'InvtertLabel
         '
         Me.InvtertLabel.AutoSize = True
-        Me.InvtertLabel.Location = New System.Drawing.Point(156, 351)
+        Me.InvtertLabel.Location = New System.Drawing.Point(223, 326)
         Me.InvtertLabel.Name = "InvtertLabel"
         Me.InvtertLabel.Size = New System.Drawing.Size(49, 20)
         Me.InvtertLabel.TabIndex = 14
         Me.InvtertLabel.Text = "Invert"
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(117, 326)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(49, 20)
+        Me.Label3.TabIndex = 15
+        Me.Label3.Text = "Invert"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(117, 306)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(46, 20)
+        Me.Label4.TabIndex = 16
+        Me.Label4.Text = "value"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(124, 371)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(49, 20)
+        Me.Label5.TabIndex = 17
+        Me.Label5.Text = "Scale"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(99, 431)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(109, 20)
+        Me.Label6.TabIndex = 18
+        Me.Label6.Text = "graphed value"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(120, 391)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(53, 20)
+        Me.Label7.TabIndex = 19
+        Me.Label7.Text = "Offset"
+        '
+        'OffsetLabel
+        '
+        Me.OffsetLabel.AutoSize = True
+        Me.OffsetLabel.Location = New System.Drawing.Point(219, 395)
+        Me.OffsetLabel.Name = "OffsetLabel"
+        Me.OffsetLabel.Size = New System.Drawing.Size(53, 20)
+        Me.OffsetLabel.TabIndex = 20
+        Me.OffsetLabel.Text = "Offset"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(117, 351)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(57, 20)
+        Me.Label8.TabIndex = 21
+        Me.Label8.Text = "Range"
+        '
+        'RangeLabel
+        '
+        Me.RangeLabel.AutoSize = True
+        Me.RangeLabel.Location = New System.Drawing.Point(215, 351)
+        Me.RangeLabel.Name = "RangeLabel"
+        Me.RangeLabel.Size = New System.Drawing.Size(57, 20)
+        Me.RangeLabel.TabIndex = 22
+        Me.RangeLabel.Text = "Range"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(922, 432)
+        Me.ClientSize = New System.Drawing.Size(937, 460)
+        Me.Controls.Add(Me.RangeLabel)
+        Me.Controls.Add(Me.Label8)
+        Me.Controls.Add(Me.OffsetLabel)
+        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.InvtertLabel)
         Me.Controls.Add(Me.ScaleLabel)
         Me.Controls.Add(Me.HBottomLabel)
@@ -226,4 +314,12 @@ Partial Class Form1
     Friend WithEvents HBottomLabel As Label
     Friend WithEvents ScaleLabel As Label
     Friend WithEvents InvtertLabel As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents OffsetLabel As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents RangeLabel As Label
 End Class

@@ -22,6 +22,7 @@
         Dim range As Integer
         Dim scale As Integer
         Dim offset As Integer
+        Dim sc As Integer
 
 
         lastX = 0
@@ -52,39 +53,46 @@
             Else
                 If tempF < lastX Then
                     MinLabel.Text = CInt(tempF)
+                    ' minTemp = PictureBox1.Height - CInt(tempF)
                     minTemp = CInt(tempF)
                 End If
                 If tempF > lastX Then
                     MaxLabel.Text = Fix(tempF)
+                    ' maxTemp = PictureBox1.Height - CInt(tempF)
                     maxTemp = CInt(tempF)
                 End If
             End If
 
             inv = PictureBox1.Height - CInt(tempF)
             InvtertLabel.Text = inv
-            range = (maxTemp + 5) - (minTemp - 5) '137 - 27
-
+            range = (maxTemp + 5) - (minTemp - 5)
+            'range = (minTemp + 5) - (maxTemp - 5) '137 - 27
+            RangeLabel.Text = range
             If range = 0 Then
-                scale = PictureBox1.Height '/ range
+                scale = PictureBox1.Height / (range + 1)
             ElseIf range <> 0 Then
                 scale = PictureBox1.Height / range
             End If
-            'scale = PictureBox1.Height / range
-            ScaleLabel.Text = offset
 
-            offset = PictureBox1.Height / 2
+            ScaleLabel.Text = scale
 
-            ' graphF = PictureBox1.Height - CInt(tempF)
-            graphF = (inv * scale) - offset
+            'If maxTemp = 0 Then
+            '    sc = PictureBox1.Height
+            'ElseIf maxTemp <> 0 Then
+            '    sc = PictureBox1.Height / maxTemp
+            'End If
+
+
+            offset = PictureBox1.Height / 4
+            OffsetLabel.Text = offset
+
+            graphF = ((inv / scale)) + offset
             Label2.Text = graphF
 
-
-            ' PictureBox1.CreateGraphics.DrawLine(Pens.White, lastX, lastY, loopX, CInt(tempF))
             PictureBox1.CreateGraphics.DrawLine(Pens.DarkSeaGreen, lastX, lastY, loopX, graphF)
             lastX = loopX
 
             loopX += (PictureBox1.Width / 96)
-
             lastY = graphF
         Loop
 
