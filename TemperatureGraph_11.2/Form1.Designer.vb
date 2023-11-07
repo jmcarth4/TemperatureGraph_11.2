@@ -32,12 +32,19 @@ Partial Class Form1
         Me.TempGButton = New System.Windows.Forms.Button()
         Me.ArrayButton = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.HcenterLabel = New System.Windows.Forms.Label()
+        Me.HtopLabel = New System.Windows.Forms.Label()
+        Me.h2Label = New System.Windows.Forms.Label()
+        Me.h1Label = New System.Windows.Forms.Label()
+        Me.HBottomLabel = New System.Windows.Forms.Label()
+        Me.ScaleLabel = New System.Windows.Forms.Label()
+        Me.InvtertLabel = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'QuitButton
         '
-        Me.QuitButton.Location = New System.Drawing.Point(743, 438)
+        Me.QuitButton.Location = New System.Drawing.Point(727, 343)
         Me.QuitButton.Name = "QuitButton"
         Me.QuitButton.Size = New System.Drawing.Size(96, 52)
         Me.QuitButton.TabIndex = 0
@@ -47,16 +54,16 @@ Partial Class Form1
         'PictureBox1
         '
         Me.PictureBox1.BackColor = System.Drawing.Color.Black
-        Me.PictureBox1.Location = New System.Drawing.Point(30, 22)
+        Me.PictureBox1.Location = New System.Drawing.Point(87, 29)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(600, 400)
+        Me.PictureBox1.Size = New System.Drawing.Size(823, 274)
         Me.PictureBox1.TabIndex = 1
         Me.PictureBox1.TabStop = False
         '
         'MinLabel
         '
         Me.MinLabel.AutoSize = True
-        Me.MinLabel.Location = New System.Drawing.Point(518, 454)
+        Me.MinLabel.Location = New System.Drawing.Point(454, 359)
         Me.MinLabel.Name = "MinLabel"
         Me.MinLabel.Size = New System.Drawing.Size(34, 20)
         Me.MinLabel.TabIndex = 2
@@ -65,7 +72,7 @@ Partial Class Form1
         'MaxLabel
         '
         Me.MaxLabel.AutoSize = True
-        Me.MaxLabel.Location = New System.Drawing.Point(580, 453)
+        Me.MaxLabel.Location = New System.Drawing.Point(566, 359)
         Me.MaxLabel.Name = "MaxLabel"
         Me.MaxLabel.Size = New System.Drawing.Size(38, 20)
         Me.MaxLabel.TabIndex = 3
@@ -74,7 +81,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(164, 446)
+        Me.Label1.Location = New System.Drawing.Point(159, 323)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(46, 20)
         Me.Label1.TabIndex = 4
@@ -87,7 +94,7 @@ Partial Class Form1
         '
         'TempGButton
         '
-        Me.TempGButton.Location = New System.Drawing.Point(41, 438)
+        Me.TempGButton.Location = New System.Drawing.Point(30, 343)
         Me.TempGButton.Name = "TempGButton"
         Me.TempGButton.Size = New System.Drawing.Size(81, 36)
         Me.TempGButton.TabIndex = 5
@@ -96,7 +103,7 @@ Partial Class Form1
         '
         'ArrayButton
         '
-        Me.ArrayButton.Location = New System.Drawing.Point(237, 428)
+        Me.ArrayButton.Location = New System.Drawing.Point(244, 309)
         Me.ArrayButton.Name = "ArrayButton"
         Me.ArrayButton.Size = New System.Drawing.Size(113, 70)
         Me.ArrayButton.TabIndex = 6
@@ -106,17 +113,87 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(376, 446)
+        Me.Label2.Location = New System.Drawing.Point(131, 403)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(109, 20)
         Me.Label2.TabIndex = 7
         Me.Label2.Text = "graphed value"
         '
+        'HcenterLabel
+        '
+        Me.HcenterLabel.AutoSize = True
+        Me.HcenterLabel.Location = New System.Drawing.Point(-3, 149)
+        Me.HcenterLabel.Name = "HcenterLabel"
+        Me.HcenterLabel.Size = New System.Drawing.Size(54, 20)
+        Me.HcenterLabel.TabIndex = 8
+        Me.HcenterLabel.Text = "center"
+        '
+        'HtopLabel
+        '
+        Me.HtopLabel.AutoSize = True
+        Me.HtopLabel.Location = New System.Drawing.Point(-3, 29)
+        Me.HtopLabel.Name = "HtopLabel"
+        Me.HtopLabel.Size = New System.Drawing.Size(32, 20)
+        Me.HtopLabel.TabIndex = 9
+        Me.HtopLabel.Text = "top"
+        '
+        'h2Label
+        '
+        Me.h2Label.AutoSize = True
+        Me.h2Label.Location = New System.Drawing.Point(-3, 85)
+        Me.h2Label.Name = "h2Label"
+        Me.h2Label.Size = New System.Drawing.Size(45, 20)
+        Me.h2Label.TabIndex = 10
+        Me.h2Label.Text = ".25%"
+        '
+        'h1Label
+        '
+        Me.h1Label.AutoSize = True
+        Me.h1Label.Location = New System.Drawing.Point(-3, 208)
+        Me.h1Label.Name = "h1Label"
+        Me.h1Label.Size = New System.Drawing.Size(45, 20)
+        Me.h1Label.TabIndex = 11
+        Me.h1Label.Text = ".75%"
+        '
+        'HBottomLabel
+        '
+        Me.HBottomLabel.AutoSize = True
+        Me.HBottomLabel.Location = New System.Drawing.Point(-3, 267)
+        Me.HBottomLabel.Name = "HBottomLabel"
+        Me.HBottomLabel.Size = New System.Drawing.Size(59, 20)
+        Me.HBottomLabel.TabIndex = 12
+        Me.HBottomLabel.Text = "bottom"
+        '
+        'ScaleLabel
+        '
+        Me.ScaleLabel.AutoSize = True
+        Me.ScaleLabel.Location = New System.Drawing.Point(156, 375)
+        Me.ScaleLabel.Name = "ScaleLabel"
+        Me.ScaleLabel.Size = New System.Drawing.Size(49, 20)
+        Me.ScaleLabel.TabIndex = 13
+        Me.ScaleLabel.Text = "Scale"
+        '
+        'InvtertLabel
+        '
+        Me.InvtertLabel.AutoSize = True
+        Me.InvtertLabel.Location = New System.Drawing.Point(156, 351)
+        Me.InvtertLabel.Name = "InvtertLabel"
+        Me.InvtertLabel.Size = New System.Drawing.Size(49, 20)
+        Me.InvtertLabel.TabIndex = 14
+        Me.InvtertLabel.Text = "Invert"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(851, 497)
+        Me.ClientSize = New System.Drawing.Size(922, 432)
+        Me.Controls.Add(Me.InvtertLabel)
+        Me.Controls.Add(Me.ScaleLabel)
+        Me.Controls.Add(Me.HBottomLabel)
+        Me.Controls.Add(Me.h1Label)
+        Me.Controls.Add(Me.h2Label)
+        Me.Controls.Add(Me.HtopLabel)
+        Me.Controls.Add(Me.HcenterLabel)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.ArrayButton)
         Me.Controls.Add(Me.TempGButton)
@@ -142,4 +219,11 @@ Partial Class Form1
     Friend WithEvents TempGButton As Button
     Friend WithEvents ArrayButton As Button
     Friend WithEvents Label2 As Label
+    Friend WithEvents HcenterLabel As Label
+    Friend WithEvents HtopLabel As Label
+    Friend WithEvents h2Label As Label
+    Friend WithEvents h1Label As Label
+    Friend WithEvents HBottomLabel As Label
+    Friend WithEvents ScaleLabel As Label
+    Friend WithEvents InvtertLabel As Label
 End Class
