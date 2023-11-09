@@ -47,14 +47,19 @@ Partial Class Form1
         Me.OffsetLabel = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.RangeLabel = New System.Windows.Forms.Label()
+        Me.DataButton = New System.Windows.Forms.Button()
+        Me.MaxMinButton = New System.Windows.Forms.Button()
+        Me.DataListBox = New System.Windows.Forms.ListBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'QuitButton
         '
-        Me.QuitButton.Location = New System.Drawing.Point(727, 343)
+        Me.QuitButton.Location = New System.Drawing.Point(1096, 433)
         Me.QuitButton.Name = "QuitButton"
-        Me.QuitButton.Size = New System.Drawing.Size(96, 52)
+        Me.QuitButton.Size = New System.Drawing.Size(89, 36)
         Me.QuitButton.TabIndex = 0
         Me.QuitButton.Text = "Quit"
         Me.QuitButton.UseVisualStyleBackColor = True
@@ -71,7 +76,7 @@ Partial Class Form1
         'MinLabel
         '
         Me.MinLabel.AutoSize = True
-        Me.MinLabel.Location = New System.Drawing.Point(454, 359)
+        Me.MinLabel.Location = New System.Drawing.Point(660, 359)
         Me.MinLabel.Name = "MinLabel"
         Me.MinLabel.Size = New System.Drawing.Size(34, 20)
         Me.MinLabel.TabIndex = 2
@@ -80,7 +85,7 @@ Partial Class Form1
         'MaxLabel
         '
         Me.MaxLabel.AutoSize = True
-        Me.MaxLabel.Location = New System.Drawing.Point(566, 359)
+        Me.MaxLabel.Location = New System.Drawing.Point(731, 359)
         Me.MaxLabel.Name = "MaxLabel"
         Me.MaxLabel.Size = New System.Drawing.Size(38, 20)
         Me.MaxLabel.TabIndex = 3
@@ -102,7 +107,7 @@ Partial Class Form1
         '
         'TempGButton
         '
-        Me.TempGButton.Location = New System.Drawing.Point(30, 343)
+        Me.TempGButton.Location = New System.Drawing.Point(304, 318)
         Me.TempGButton.Name = "TempGButton"
         Me.TempGButton.Size = New System.Drawing.Size(81, 36)
         Me.TempGButton.TabIndex = 5
@@ -111,7 +116,7 @@ Partial Class Form1
         '
         'ArrayButton
         '
-        Me.ArrayButton.Location = New System.Drawing.Point(335, 334)
+        Me.ArrayButton.Location = New System.Drawing.Point(528, 341)
         Me.ArrayButton.Name = "ArrayButton"
         Me.ArrayButton.Size = New System.Drawing.Size(113, 70)
         Me.ArrayButton.TabIndex = 6
@@ -262,11 +267,61 @@ Partial Class Form1
         Me.RangeLabel.TabIndex = 22
         Me.RangeLabel.Text = "Range"
         '
+        'DataButton
+        '
+        Me.DataButton.Location = New System.Drawing.Point(5, 314)
+        Me.DataButton.Name = "DataButton"
+        Me.DataButton.Size = New System.Drawing.Size(106, 45)
+        Me.DataButton.TabIndex = 23
+        Me.DataButton.Text = "Collect Data"
+        Me.DataButton.UseVisualStyleBackColor = True
+        '
+        'MaxMinButton
+        '
+        Me.MaxMinButton.Location = New System.Drawing.Point(1, 366)
+        Me.MaxMinButton.Name = "MaxMinButton"
+        Me.MaxMinButton.Size = New System.Drawing.Size(113, 62)
+        Me.MaxMinButton.TabIndex = 24
+        Me.MaxMinButton.Text = "Find max and min"
+        Me.MaxMinButton.UseVisualStyleBackColor = True
+        '
+        'DataListBox
+        '
+        Me.DataListBox.FormattingEnabled = True
+        Me.DataListBox.ItemHeight = 20
+        Me.DataListBox.Location = New System.Drawing.Point(916, 23)
+        Me.DataListBox.Name = "DataListBox"
+        Me.DataListBox.Size = New System.Drawing.Size(201, 404)
+        Me.DataListBox.TabIndex = 25
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(660, 326)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(78, 20)
+        Me.Label9.TabIndex = 26
+        Me.Label9.Text = "Min Temp"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(744, 326)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(82, 20)
+        Me.Label10.TabIndex = 27
+        Me.Label10.Text = "Max Temp"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(937, 460)
+        Me.ClientSize = New System.Drawing.Size(1184, 479)
+        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.DataListBox)
+        Me.Controls.Add(Me.MaxMinButton)
+        Me.Controls.Add(Me.DataButton)
         Me.Controls.Add(Me.RangeLabel)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.OffsetLabel)
@@ -322,4 +377,9 @@ Partial Class Form1
     Friend WithEvents OffsetLabel As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents RangeLabel As Label
+    Friend WithEvents DataButton As Button
+    Friend WithEvents MaxMinButton As Button
+    Friend WithEvents DataListBox As ListBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label10 As Label
 End Class

@@ -9,6 +9,77 @@
 
     Public penColor As Pen
 
+    Public data(95) As Double
+
+    Public tempF As Double
+    Dim minTemp As Integer
+    Dim maxTemp As Integer
+
+    Sub CollectData()
+        Dim i As Integer                'Sets index of array.
+        Dim loopCount As Integer        'Sets loop count of display loop.
+
+        'Populates array with 10000 values (sum of two random numbers 1 to 6 = pair of dice roll)
+        For i = 0 To 95
+            data(i) = CInt((Rnd() * 100) + 32)
+
+        Next
+
+        DataListBox.Items.Clear()                          'Clears listbox
+
+        Do Until loopCount = 96
+            DataListBox.Items.Add(Str(data(loopCount)))   'Displays array in listbox 
+            loopCount = loopCount + 1
+        Loop
+
+
+        'For i = 0 To 95
+        '    tempF = CInt((Rnd() * 100) + 32)
+        'Next
+
+    End Sub
+
+    Sub MaxMin()
+        Dim i As Integer
+        Dim currentMin As Integer = 150
+        Dim currentMax As Integer = -150
+
+
+
+        For i = 0 To 95
+            'If i = 0 Then
+            ' MaxLabel.Text = data(0)
+            ' MinLabel.Text = 40
+            ' Else
+            If data(i) < currentMin Then
+                    MinLabel.Text = data(i)
+
+                    minTemp = data(i)
+                    currentMin = data(i)
+                End If
+                If data(i) > currentMax Then
+                    MaxLabel.Text = data(i)
+
+                    maxTemp = data(i)
+                    currentMax = data(i)
+                End If
+
+            'End If
+
+
+        Next
+
+    End Sub
+
+
+    Private Sub DataButton_Click(sender As Object, e As EventArgs) Handles DataButton.Click
+        CollectData()
+    End Sub
+
+    Private Sub MaxMinButton_Click(sender As Object, e As EventArgs) Handles MaxMinButton.Click
+        MaxMin()
+    End Sub
+
 
 
     Private Sub TempGButton_Click(sender As Object, e As EventArgs) Handles TempGButton.Click
@@ -22,7 +93,7 @@
         Dim range As Integer
         Dim scale As Integer
         Dim offset As Integer
-        Dim sc As Integer
+        Dim i As Integer
 
 
         lastX = 0
@@ -41,62 +112,61 @@
         Hdivisions()
 
 
+        For i = 0 To 95
+            Do Until loopX > PictureBox1.Size.Width
+                'For i = 0 To 95
+                tempF = data(i)
+                'Next
 
-        Do Until loopX > PictureBox1.Size.Width
-            tempF = (Rnd() * 100) + 32
 
-            Label1.Text = CInt(tempF)
 
-            If loopX = 0 Then
-                MaxLabel.Text = CInt(tempF)
-                MinLabel.Text = Fix(tempF)
-            Else
-                If tempF < lastX Then
-                    MinLabel.Text = CInt(tempF)
-                    ' minTemp = PictureBox1.Height - CInt(tempF)
-                    minTemp = CInt(tempF)
+                Label1.Text = CInt(tempF)
+
+                'If loopX = 0 Then
+                '    MaxLabel.Text = CInt(tempF)
+                '    MinLabel.Text = Fix(tempF)
+                'Else
+                '    If tempF < lastX Then
+                '        MinLabel.Text = CInt(tempF)
+                '        ' minTemp = PictureBox1.Height - CInt(tempF)
+                '        minTemp = CInt(tempF)
+                '    End If
+                '    If tempF > lastX Then
+                '        MaxLabel.Text = Fix(tempF)
+                '        ' maxTemp = PictureBox1.Height - CInt(tempF)
+                '        maxTemp = CInt(tempF)
+                '    End If
+                'End If
+
+                inv = CInt(tempF) - (minTemp - 5)
+                InvtertLabel.Text = inv
+                range = (maxTemp + 5) - (minTemp - 5)
+
+                RangeLabel.Text = range
+                If range = 0 Then
+                    'scale = PictureBox1.Height / (range + 1)
+                ElseIf range <> 0 Then
+                    scale = PictureBox1.Height / range
                 End If
-                If tempF > lastX Then
-                    MaxLabel.Text = Fix(tempF)
-                    ' maxTemp = PictureBox1.Height - CInt(tempF)
-                    maxTemp = CInt(tempF)
-                End If
-            End If
 
-            inv = PictureBox1.Height - CInt(tempF)
-            InvtertLabel.Text = inv
-            range = (maxTemp + 5) - (minTemp - 5)
-            'range = (minTemp + 5) - (maxTemp - 5) '137 - 27
-            RangeLabel.Text = range
-            If range = 0 Then
-                scale = PictureBox1.Height / (range + 1)
-            ElseIf range <> 0 Then
-                scale = PictureBox1.Height / range
-            End If
-
-            ScaleLabel.Text = scale
-
-            'If maxTemp = 0 Then
-            '    sc = PictureBox1.Height
-            'ElseIf maxTemp <> 0 Then
-            '    sc = PictureBox1.Height / maxTemp
-            'End If
+                ScaleLabel.Text = scale
 
 
-            offset = PictureBox1.Height / 4
-            OffsetLabel.Text = offset
 
-            graphF = ((inv / scale)) + offset
-            Label2.Text = graphF
+                'offset = PictureBox1.Height / 4
+                'OffsetLabel.Text = offset
 
-            PictureBox1.CreateGraphics.DrawLine(Pens.DarkSeaGreen, lastX, lastY, loopX, graphF)
-            lastX = loopX
+                graphF = PictureBox1.Height - (scale * inv)
+                Label2.Text = graphF
 
-            loopX += (PictureBox1.Width / 96)
-            lastY = graphF
-        Loop
+                PictureBox1.CreateGraphics.DrawLine(Pens.DarkSeaGreen, lastX, lastY, loopX, graphF)
+                lastX = loopX
 
+                loopX += (PictureBox1.Width / 96)
+                lastY = graphF
+            Loop
 
+        Next
 
 
     End Sub
