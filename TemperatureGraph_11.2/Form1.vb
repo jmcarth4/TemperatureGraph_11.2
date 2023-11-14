@@ -35,9 +35,15 @@
         Dim i As Integer                'Sets index of array.
         Dim loopCount As Integer        'Sets loop count of display loop.
 
-        'Populates array with 10000 values (sum of two random numbers 1 to 6 = pair of dice roll)
+        'Populates array with 95 values  
         For i = 0 To 95
-            data(i) = CInt((Rnd() * 100) + 32)
+
+            If AnIn1CheckBox.Checked = True Then
+                data(i) = vOut
+            ElseIf AnIn1CheckBox.Checked = False Then
+                data(i) = CInt((Rnd() * 100) + 32)
+            End If
+
 
         Next
 
@@ -65,17 +71,17 @@
         For i = 0 To 95
 
             If data(i) < currentMin Then
-                    MinLabel.Text = data(i)
+                MinLabel.Text = data(i)
 
-                    minTemp = data(i)
-                    currentMin = data(i)
-                End If
-                If data(i) > currentMax Then
-                    MaxLabel.Text = data(i)
+                minTemp = data(i)
+                currentMin = data(i)
+            End If
+            If data(i) > currentMax Then
+                MaxLabel.Text = data(i)
 
-                    maxTemp = data(i)
-                    currentMax = data(i)
-                End If
+                maxTemp = data(i)
+                currentMax = data(i)
+            End If
 
 
 
@@ -102,6 +108,7 @@
         Hdivisions()
 
         Do Until loopX > PictureBox1.Size.Width    'Need?
+
             For i = 0 To 95
                 tempF = data(i)
                 Label1.Text = CInt(tempF)
@@ -271,6 +278,9 @@
             If portState = True Then
                 'Transmit and receive data from Qy@ analog input 1 
                 AnalogIn()
+                'CollectData()
+                'MaxMin()
+                'Graph()
             End If
         End If
 
@@ -391,6 +401,8 @@
         newData += 1                                                    'Increment newData once loop is complete
     End Sub
 
+
+
     'Sets com port and baud rate 
     Sub ReadComPorts()
         portState = False
@@ -419,16 +431,21 @@
         BaudRateLabel.Text = baud
     End Sub
 
-    Private Sub ComPortToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ComPortToolStripMenuItem.Click
-
-    End Sub
-
-    Private Sub BaudRateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BaudRateToolStripMenuItem.Click
-
-    End Sub
-
-    Private Sub SampleRateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SampleRateToolStripMenuItem.Click
-
+    Sub SampleRate()
+        SampleRateComboBox.Items.Clear()
+        SampleRateComboBox.Items.Add(10)
+        SampleRateComboBox.Items.Add(100)
+        SampleRateComboBox.Items.Add(500)
+        SampleRateComboBox.Items.Add(1000)
+        SampleRateComboBox.Items.Add(5000)
+        SampleRateComboBox.Items.Add(10000)
+        SampleRateComboBox.Items.Add(60000)
+        'Timer1.Interval = 1
+        'Timer1.Interval = 100
+        'Timer1.Interval = 500
+        'Timer1.Interval = 1000
+        'Timer1.Interval = 5000
+        'Timer1.Interval = 10000
     End Sub
 
     'Selects com port when selected in combo box
@@ -439,6 +456,16 @@
     'Selects baud rate when selected in combo box
     Private Sub BaudRateComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles BaudRateComboBox.SelectedIndexChanged
         ReadComPorts()
+    End Sub
+
+    Private Sub SampleRateComboBox_Click(sender As Object, e As EventArgs) Handles SampleRateComboBox.Click
+        If SampleRateComboBox.SelectedItem = 0 Then
+
+        ElseIf SampleRateComboBox.SelectedItem > 0 Then
+            Timer1.Interval = SampleRateComboBox.SelectedItem
+            SampleRateLabel.Text = SampleRateComboBox.SelectedItem
+        End If
+
     End Sub
 
     'Saves set values to file
@@ -531,6 +558,7 @@
 
         End Try
 
+        SampleRate()
     End Sub
 
     'Closes Serial Ports when forms closes
