@@ -53,7 +53,23 @@ Partial Class Form1
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.GraphInButton = New System.Windows.Forms.Button()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ComPortToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ComPortComboBox = New System.Windows.Forms.ToolStripComboBox()
+        Me.BaudRateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BaudRateComboBox = New System.Windows.Forms.ToolStripComboBox()
+        Me.SampleRateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ConnectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SerialPort1 = New System.IO.Ports.SerialPort(Me.components)
+        Me.VA1Label = New System.Windows.Forms.Label()
+        Me.AnIn1CheckBox = New System.Windows.Forms.CheckBox()
+        Me.BaudRateLabel = New System.Windows.Forms.Label()
+        Me.ComPortLabel = New System.Windows.Forms.Label()
+        Me.LoadSettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'QuitButton
@@ -322,11 +338,121 @@ Partial Class Form1
         Me.GraphInButton.Text = "Graph Input"
         Me.GraphInButton.UseVisualStyleBackColor = True
         '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.GripMargin = New System.Windows.Forms.Padding(2, 2, 0, 2)
+        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(1184, 33)
+        Me.MenuStrip1.TabIndex = 29
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'SettingsToolStripMenuItem
+        '
+        Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ComPortToolStripMenuItem, Me.BaudRateToolStripMenuItem, Me.SampleRateToolStripMenuItem, Me.SaveSettingsToolStripMenuItem, Me.LoadSettingsToolStripMenuItem, Me.ConnectToolStripMenuItem})
+        Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(92, 29)
+        Me.SettingsToolStripMenuItem.Text = "Settings"
+        '
+        'ComPortToolStripMenuItem
+        '
+        Me.ComPortToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ComPortComboBox})
+        Me.ComPortToolStripMenuItem.Name = "ComPortToolStripMenuItem"
+        Me.ComPortToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
+        Me.ComPortToolStripMenuItem.Text = "Com Port"
+        '
+        'ComPortComboBox
+        '
+        Me.ComPortComboBox.Name = "ComPortComboBox"
+        Me.ComPortComboBox.Size = New System.Drawing.Size(121, 33)
+        '
+        'BaudRateToolStripMenuItem
+        '
+        Me.BaudRateToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BaudRateComboBox})
+        Me.BaudRateToolStripMenuItem.Name = "BaudRateToolStripMenuItem"
+        Me.BaudRateToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
+        Me.BaudRateToolStripMenuItem.Text = "Baud Rate"
+        '
+        'BaudRateComboBox
+        '
+        Me.BaudRateComboBox.Name = "BaudRateComboBox"
+        Me.BaudRateComboBox.Size = New System.Drawing.Size(121, 33)
+        '
+        'SampleRateToolStripMenuItem
+        '
+        Me.SampleRateToolStripMenuItem.Name = "SampleRateToolStripMenuItem"
+        Me.SampleRateToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
+        Me.SampleRateToolStripMenuItem.Text = "Sample Rate"
+        '
+        'SaveSettingsToolStripMenuItem
+        '
+        Me.SaveSettingsToolStripMenuItem.Name = "SaveSettingsToolStripMenuItem"
+        Me.SaveSettingsToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
+        Me.SaveSettingsToolStripMenuItem.Text = "Save Settings"
+        '
+        'ConnectToolStripMenuItem
+        '
+        Me.ConnectToolStripMenuItem.Name = "ConnectToolStripMenuItem"
+        Me.ConnectToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
+        Me.ConnectToolStripMenuItem.Text = "Connect "
+        '
+        'SerialPort1
+        '
+        '
+        'VA1Label
+        '
+        Me.VA1Label.AutoSize = True
+        Me.VA1Label.Location = New System.Drawing.Point(672, 420)
+        Me.VA1Label.Name = "VA1Label"
+        Me.VA1Label.Size = New System.Drawing.Size(36, 20)
+        Me.VA1Label.TabIndex = 30
+        Me.VA1Label.Text = "V in"
+        '
+        'AnIn1CheckBox
+        '
+        Me.AnIn1CheckBox.AutoSize = True
+        Me.AnIn1CheckBox.Location = New System.Drawing.Point(531, 420)
+        Me.AnIn1CheckBox.Name = "AnIn1CheckBox"
+        Me.AnIn1CheckBox.Size = New System.Drawing.Size(86, 24)
+        Me.AnIn1CheckBox.TabIndex = 31
+        Me.AnIn1CheckBox.Text = "Sensor"
+        Me.AnIn1CheckBox.UseVisualStyleBackColor = True
+        '
+        'BaudRateLabel
+        '
+        Me.BaudRateLabel.AutoSize = True
+        Me.BaudRateLabel.Location = New System.Drawing.Point(744, 6)
+        Me.BaudRateLabel.Name = "BaudRateLabel"
+        Me.BaudRateLabel.Size = New System.Drawing.Size(86, 20)
+        Me.BaudRateLabel.TabIndex = 32
+        Me.BaudRateLabel.Text = "Baud Rate"
+        '
+        'ComPortLabel
+        '
+        Me.ComPortLabel.AutoSize = True
+        Me.ComPortLabel.Location = New System.Drawing.Point(633, 6)
+        Me.ComPortLabel.Name = "ComPortLabel"
+        Me.ComPortLabel.Size = New System.Drawing.Size(75, 20)
+        Me.ComPortLabel.TabIndex = 33
+        Me.ComPortLabel.Text = "Com Port"
+        '
+        'LoadSettingsToolStripMenuItem
+        '
+        Me.LoadSettingsToolStripMenuItem.Name = "LoadSettingsToolStripMenuItem"
+        Me.LoadSettingsToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
+        Me.LoadSettingsToolStripMenuItem.Text = "Load Settings"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1184, 479)
+        Me.Controls.Add(Me.ComPortLabel)
+        Me.Controls.Add(Me.BaudRateLabel)
+        Me.Controls.Add(Me.AnIn1CheckBox)
+        Me.Controls.Add(Me.VA1Label)
         Me.Controls.Add(Me.GraphInButton)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label9)
@@ -356,9 +482,13 @@ Partial Class Form1
         Me.Controls.Add(Me.MinLabel)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.QuitButton)
+        Me.Controls.Add(Me.MenuStrip1)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "Form1"
         Me.Text = "Form1"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -394,4 +524,19 @@ Partial Class Form1
     Friend WithEvents Label9 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents GraphInButton As Button
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ComPortToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents BaudRateToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SampleRateToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ConnectToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SaveSettingsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ComPortComboBox As ToolStripComboBox
+    Friend WithEvents BaudRateComboBox As ToolStripComboBox
+    Friend WithEvents SerialPort1 As IO.Ports.SerialPort
+    Friend WithEvents VA1Label As Label
+    Friend WithEvents AnIn1CheckBox As CheckBox
+    Friend WithEvents BaudRateLabel As Label
+    Friend WithEvents ComPortLabel As Label
+    Friend WithEvents LoadSettingsToolStripMenuItem As ToolStripMenuItem
 End Class
