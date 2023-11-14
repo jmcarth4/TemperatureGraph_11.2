@@ -30,7 +30,7 @@ Partial Class Form1
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.TempGButton = New System.Windows.Forms.Button()
-        Me.ArrayButton = New System.Windows.Forms.Button()
+        Me.TestButton = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.HcenterLabel = New System.Windows.Forms.Label()
         Me.HtopLabel = New System.Windows.Forms.Label()
@@ -52,6 +52,7 @@ Partial Class Form1
         Me.DataListBox = New System.Windows.Forms.ListBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.GraphInButton = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -107,21 +108,21 @@ Partial Class Form1
         '
         'TempGButton
         '
-        Me.TempGButton.Location = New System.Drawing.Point(304, 318)
+        Me.TempGButton.Location = New System.Drawing.Point(1, 433)
         Me.TempGButton.Name = "TempGButton"
         Me.TempGButton.Size = New System.Drawing.Size(81, 36)
         Me.TempGButton.TabIndex = 5
         Me.TempGButton.Text = "Graph Temperature"
         Me.TempGButton.UseVisualStyleBackColor = True
         '
-        'ArrayButton
+        'TestButton
         '
-        Me.ArrayButton.Location = New System.Drawing.Point(528, 341)
-        Me.ArrayButton.Name = "ArrayButton"
-        Me.ArrayButton.Size = New System.Drawing.Size(113, 70)
-        Me.ArrayButton.TabIndex = 6
-        Me.ArrayButton.Text = "Graph and store"
-        Me.ArrayButton.UseVisualStyleBackColor = True
+        Me.TestButton.Location = New System.Drawing.Point(531, 326)
+        Me.TestButton.Name = "TestButton"
+        Me.TestButton.Size = New System.Drawing.Size(113, 70)
+        Me.TestButton.TabIndex = 6
+        Me.TestButton.Text = "Test Graph Stuff"
+        Me.TestButton.UseVisualStyleBackColor = True
         '
         'Label2
         '
@@ -312,11 +313,21 @@ Partial Class Form1
         Me.Label10.TabIndex = 27
         Me.Label10.Text = "Max Temp"
         '
+        'GraphInButton
+        '
+        Me.GraphInButton.Location = New System.Drawing.Point(302, 314)
+        Me.GraphInButton.Name = "GraphInButton"
+        Me.GraphInButton.Size = New System.Drawing.Size(114, 45)
+        Me.GraphInButton.TabIndex = 28
+        Me.GraphInButton.Text = "Graph Input"
+        Me.GraphInButton.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1184, 479)
+        Me.Controls.Add(Me.GraphInButton)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.DataListBox)
@@ -338,7 +349,7 @@ Partial Class Form1
         Me.Controls.Add(Me.HtopLabel)
         Me.Controls.Add(Me.HcenterLabel)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.ArrayButton)
+        Me.Controls.Add(Me.TestButton)
         Me.Controls.Add(Me.TempGButton)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.MaxLabel)
@@ -360,7 +371,7 @@ Partial Class Form1
     Friend WithEvents Label1 As Label
     Friend WithEvents Timer1 As Timer
     Friend WithEvents TempGButton As Button
-    Friend WithEvents ArrayButton As Button
+    Friend WithEvents TestButton As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents HcenterLabel As Label
     Friend WithEvents HtopLabel As Label
@@ -382,4 +393,5 @@ Partial Class Form1
     Friend WithEvents DataListBox As ListBox
     Friend WithEvents Label9 As Label
     Friend WithEvents Label10 As Label
+    Friend WithEvents GraphInButton As Button
 End Class

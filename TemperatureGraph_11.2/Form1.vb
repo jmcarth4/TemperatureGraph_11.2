@@ -47,10 +47,7 @@
 
 
         For i = 0 To 95
-            'If i = 0 Then
-            ' MaxLabel.Text = data(0)
-            ' MinLabel.Text = 40
-            ' Else
+
             If data(i) < currentMin Then
                     MinLabel.Text = data(i)
 
@@ -64,13 +61,63 @@
                     currentMax = data(i)
                 End If
 
-            'End If
+
 
 
         Next
+        minTemp = MinLabel.Text
+        maxTemp = MaxLabel.Text
+    End Sub
+    Sub Graph()
+        Dim loopX As Integer
+        Dim tempF As Double
+        Dim graphF As Integer
+        Dim inv As Integer
+        'Dim minTemp As Integer
+        'Dim maxTemp As Integer
+        Dim range As Integer
+        Dim scale As Double
+        Dim offset As Integer
+        Dim i As Integer
+
+        lastX = 0
+        lastY = 0
+        Me.Refresh()
+        Hdivisions()
+
+        Do Until loopX > PictureBox1.Size.Width    'Need?
+            For i = 0 To 95
+                tempF = data(i)
+                Label1.Text = CInt(tempF)
+
+                inv = CInt(tempF) - (minTemp - 5)    'Invert temp
+                InvtertLabel.Text = inv
+                range = (maxTemp + 5) - (minTemp - 5)           'Set range
+                RangeLabel.Text = range
+
+                If range = 0 Then
+                    'scale = PictureBox1.Height / (range + 1)
+                ElseIf range <> 0 Then
+                    scale = PictureBox1.Height / range            'Set scale
+                End If                                            'Do not round or fix !!!!! 
+                ScaleLabel.Text = scale                            'Need exact value to several decimals to scale correctly!!
+
+                'offset = 30                                    'Not need?
+                'OffsetLabel.Text = offset
+
+                graphF = PictureBox1.Height - (scale * inv)
+                Label2.Text = graphF
+
+                'PictureBox1.CreateGraphics.DrawLine(Pens.DarkSeaGreen, lastX, lastY, loopX, graphF)
+                PictureBox1.CreateGraphics.DrawLine(Pens.DarkSeaGreen, loopX, graphF, lastX, lastY)
+                lastX = loopX
+
+                loopX += (PictureBox1.Width / 96)
+                lastY = graphF
+            Next
+        Loop
 
     End Sub
-
 
     Private Sub DataButton_Click(sender As Object, e As EventArgs) Handles DataButton.Click
         CollectData()
@@ -80,97 +127,80 @@
         MaxMin()
     End Sub
 
-
+    Private Sub GraphInButton_Click(sender As Object, e As EventArgs) Handles GraphInButton.Click
+        CollectData()
+        MaxMin()
+        Graph()
+    End Sub
 
     Private Sub TempGButton_Click(sender As Object, e As EventArgs) Handles TempGButton.Click
 
-        Dim loopX As Integer
-        Dim tempF As Double
-        Dim graphF As Integer
-        Dim inv As Integer
-        Dim minTemp As Integer
-        Dim maxTemp As Integer
-        Dim range As Integer
-        Dim scale As Integer
-        Dim offset As Integer
-        Dim i As Integer
+        Graph()
+        '  Dim loopX As Integer
+        '  Dim tempF As Double
+        '  Dim graphF As Integer
+        '  Dim inv As Integer
+        '  'Dim minTemp As Integer
+        '  'Dim maxTemp As Integer
+        '  Dim range As Integer
+        '  Dim scale As Double
+        '  Dim offset As Integer
+        '  Dim i As Integer
 
 
-        lastX = 0
-        lastY = 0
-        Me.Refresh()
-        'centerX = PictureBox1.Size.Width / 2
-        ' centerY = PictureBox1.Size.Height / 2
-        'Period = centerX
-        'lastX = 0
-        ' lastY = centerY
-        'pi2 = (2 * Math.PI)
-        'Vp = centerY / 2
-        'stepX = centerX / 360
-
-
-        Hdivisions()
-
-
-        For i = 0 To 95
-            Do Until loopX > PictureBox1.Size.Width
-                'For i = 0 To 95
-                tempF = data(i)
-                'Next
+        '  lastX = 0
+        '  lastY = 0
+        '  Me.Refresh()
+        '  Hdivisions()
 
 
 
-                Label1.Text = CInt(tempF)
-
-                'If loopX = 0 Then
-                '    MaxLabel.Text = CInt(tempF)
-                '    MinLabel.Text = Fix(tempF)
-                'Else
-                '    If tempF < lastX Then
-                '        MinLabel.Text = CInt(tempF)
-                '        ' minTemp = PictureBox1.Height - CInt(tempF)
-                '        minTemp = CInt(tempF)
-                '    End If
-                '    If tempF > lastX Then
-                '        MaxLabel.Text = Fix(tempF)
-                '        ' maxTemp = PictureBox1.Height - CInt(tempF)
-                '        maxTemp = CInt(tempF)
-                '    End If
-                'End If
-
-                inv = CInt(tempF) - (minTemp - 5)
-                InvtertLabel.Text = inv
-                range = (maxTemp + 5) - (minTemp - 5)
-
-                RangeLabel.Text = range
-                If range = 0 Then
-                    'scale = PictureBox1.Height / (range + 1)
-                ElseIf range <> 0 Then
-                    scale = PictureBox1.Height / range
-                End If
-
-                ScaleLabel.Text = scale
+        '  Do Until loopX > PictureBox1.Size.Width
+        '          For i = 0 To 95
+        '          tempF = data(i)
 
 
 
-                'offset = PictureBox1.Height / 4
-                'OffsetLabel.Text = offset
 
-                graphF = PictureBox1.Height - (scale * inv)
-                Label2.Text = graphF
+        '          Label1.Text = CInt(tempF)
 
-                PictureBox1.CreateGraphics.DrawLine(Pens.DarkSeaGreen, lastX, lastY, loopX, graphF)
-                lastX = loopX
 
-                loopX += (PictureBox1.Width / 96)
-                lastY = graphF
-            Loop
 
-        Next
+        '          inv = CInt(tempF) - (minTemp - 5)
+        '          InvtertLabel.Text = inv
+        '          range = (maxTemp + 5) - (minTemp - 5)
+
+        '          RangeLabel.Text = range
+        '          If range = 0 Then
+        '                  'scale = PictureBox1.Height / (range + 1)
+        '              ElseIf range <> 0 Then
+        '                  scale = PictureBox1.Height / range
+        '              End If
+
+        '          ScaleLabel.Text = scale
+
+
+
+        '          offset = 30
+        '          OffsetLabel.Text = offset
+
+        '          graphF = PictureBox1.Height - (scale * inv)
+        '          Label2.Text = graphF
+
+        '          'PictureBox1.CreateGraphics.DrawLine(Pens.DarkSeaGreen, lastX, lastY, loopX, graphF)
+        '          PictureBox1.CreateGraphics.DrawLine(Pens.DarkSeaGreen, loopX, graphF, lastX, lastY)
+        '          lastX = loopX
+
+        '          loopX += (PictureBox1.Width / 96)
+        '          lastY = graphF
+        '      Next
+        '      Loop
+
+        ''  Next
 
 
     End Sub
-    Private Sub ArrayButton_Click(sender As Object, e As EventArgs) Handles ArrayButton.Click
+    Private Sub TestButton_Click(sender As Object, e As EventArgs) Handles TestButton.Click
         Dim record(95) As Integer
         Dim loopX As Integer
         Dim tempF As Double
