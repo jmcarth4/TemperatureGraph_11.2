@@ -12,13 +12,18 @@
     Public data(95) As Double
 
     Public tempF As Double
+    Public i As Integer                         'Sets index of array
     Dim minTemp As Integer
     Dim maxTemp As Integer
     Dim range As Integer
 
     Dim portState As Boolean                    'Enables serial communication
     Dim drivePath As String                     'Path to file
+    Dim drivePath2 As String
     Dim fileName As String                      'Names file
+    Dim fileName2 As String
+    Dim dateTemp As String
+    Dim timeTemp As String
     Dim port As String                          'Set port name
     Dim baud As String                          'Set baud rate
 
@@ -32,32 +37,50 @@
     Dim dataIn1, dataIn2, dataIn3, dataIn4, dataIn5, dataIn6, dataIn7, dataIn8 As Integer  'Processes data in
     Public timerloop As Integer
     Sub CollectData()
-        Dim i As Integer                'Sets index of array.
+        ' Dim i As Integer                'Sets index of array.
         Dim loopCount As Integer        'Sets loop count of display loop.
+        Dim recordLength As Integer
+        Dim dataLength As Integer
+        'Populates array with 96 values  
+        If AnIn1CheckBox.Checked = True Then
+            If timerloop < 96 Then
 
-        'Populates array with 95 values  
-        For i = 0 To 95
+                dataLength = timerloop
+            Else
+
+                dataLength = 95
+            End If
+        ElseIf AnIn1CheckBox.Checked = False Then
+            dataLength = 95
+        End If
+
+        For i = 0 To dataLength
 
             If AnIn1CheckBox.Checked = True Then
-                data(i) = vOut
+                data(i) = vOut * 10
+                'If timerloop < 96 Then
+
+                '    recordLength = timerloop
+                'Else
+
+                '    recordLength = 96
+                'End If
+
             ElseIf AnIn1CheckBox.Checked = False Then
                 data(i) = CInt((Rnd() * 100) + 32)
+                'recordLength = 96
             End If
-
 
         Next
 
         DataListBox.Items.Clear()                          'Clears listbox
 
-        Do Until loopCount = 96
+        Do Until loopCount = 96 'recordLength 
             DataListBox.Items.Add(Str(data(loopCount)))   'Displays array in listbox 
             loopCount = loopCount + 1
         Loop
 
-
-        'For i = 0 To 95
-        '    tempF = CInt((Rnd() * 100) + 32)
-        'Next
+        SaveFile()
 
     End Sub
 
@@ -95,9 +118,6 @@
         Dim tempF As Double
         Dim graphF As Integer
         Dim inv As Integer
-        'Dim minTemp As Integer
-        'Dim maxTemp As Integer
-        ' Dim range As Integer
         Dim scale As Double
         Dim offset As Integer
         Dim i As Integer
@@ -139,7 +159,7 @@
                 lastY = graphF
             Next
         Loop
-
+        GraphLabels()
     End Sub
 
 
@@ -150,33 +170,68 @@
         Dim h1 As Integer
         Dim h2 As Integer
 
-
-
         hC = PictureBox1.Height * 0.5
-        HcenterLabel.Text = (range * 0.5) + minTemp - 5
         penColor = Pens.Gray
         PictureBox1.CreateGraphics.DrawLine(penColor, 0, hC, PictureBox1.Width, hC)
 
         h1 = PictureBox1.Height * 0.75
-        h1Label.Text = (range * 0.25) + minTemp - 5
         penColor = Pens.LightBlue
         PictureBox1.CreateGraphics.DrawLine(penColor, 0, h1, PictureBox1.Width, h1)
 
         h2 = PictureBox1.Height * 0.25
-        h2Label.Text = (range * 0.75) + minTemp - 5
         penColor = Pens.Orange
         PictureBox1.CreateGraphics.DrawLine(penColor, 0, h2, PictureBox1.Width, h2)
 
         hMax = PictureBox1.Height - 5
-        HBottomLabel.Text = minTemp - 5
         penColor = Pens.Blue
         PictureBox1.CreateGraphics.DrawLine(penColor, 0, hMax, PictureBox1.Width, hMax)
 
         hMin = 5
-        HtopLabel.Text = maxTemp + 5
         penColor = Pens.Red
         PictureBox1.CreateGraphics.DrawLine(penColor, 0, hMin, PictureBox1.Width, hMin)
+
     End Sub
+
+    'Sub to label side of graph across range of the data
+    Sub GraphLabels()
+        HcenterLabel.Text = (range * 0.5) + minTemp - 5
+        h1Label.Text = (range * 0.25) + minTemp - 5
+        h2Label.Text = (range * 0.75) + minTemp - 5
+        HBottomLabel.Text = minTemp - 5
+        HtopLabel.Text = maxTemp + 5
+    End Sub
+
+    Sub DateDisplay()
+        dateTemp = DateString
+        timeTemp = TimeString
+
+    End Sub
+
+    Sub SaveFile()
+        Try
+            FileOpen(1, fileName2, OpenMode.Append) 'Open file for Append
+        Catch ex As Exception
+
+        End Try
+
+        For i = 0 To 95
+            WriteLine(1, data(i), dateTemp, timeTemp)
+
+            ' WriteLine(1, " ")
+        Next
+
+
+        FileClose(1)
+
+    End Sub
+
+    Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
+        DateDisplay()
+        DateLabel.Text = dateTemp
+        TimeLabel.Text = timeTemp
+    End Sub
+
+
 
     Private Sub DataButton_Click(sender As Object, e As EventArgs) Handles DataButton.Click
         CollectData()
@@ -191,11 +246,22 @@
         CollectData()
         MaxMin()
         Graph()
+
     End Sub
 
     Private Sub TempGButton_Click(sender As Object, e As EventArgs) Handles TempGButton.Click
         Graph()
     End Sub
+
+    Private Sub AnIn1CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles AnIn1CheckBox.CheckedChanged
+        Timer1.Enabled = True
+        timerloop = 0
+    End Sub
+
+    Private Sub RefreshButton_Click(sender As Object, e As EventArgs) Handles RefreshButton.Click
+        DataListBox.Items.Clear()
+    End Sub
+
     Private Sub TestButton_Click(sender As Object, e As EventArgs) Handles TestButton.Click
         Dim record(95) As Integer
         Dim loopX As Integer
@@ -248,29 +314,7 @@
         Dim dataIn As String
         Dim inPut1, inPut2, inPut3, inPut4, inPut5, inPut6, inPut7, inPut8 As Integer
 
-        'Draws input with each timer tic
-        'If timerloop >= 1000 Then     'Sets timerloop back to 0, when end of picture box is reached
 
-        '    timerloop = 0
-        '    'Sets vertical reference lines
-        '    'ElseIf timerloop = width2 Or timerloop = width1 Or timerloop = width3 Or timerloop = width4 Or
-        '    '    timerloop = width5 Or timerloop = width6 Or timerloop = width7 Or timerloop = width8 Or
-        '    '     timerloop = width9 Then
-        '    '    vPens = Pens.Blue                   'Draws vertical reference lines in blue
-        '    '    draw()
-        '    '    HDiv()
-
-        'ElseIf timerloop = 1 Then       'Starts with black line at beginning of picture box
-        '    lastX = 0
-        '    vPens = Pens.Black
-        '    draw()
-        '    HDiv()
-        'Else                            'All other times draw black line (erase form input)
-        '    vPens = Pens.Black
-        '    draw()
-        '    HDiv()
-        'End If
-        timerloop += 1                  'Increase timer loop for each tic of timer
 
         'Enable input from Qy@ board when check box is checked
         If AnIn1CheckBox.Checked = True Then
@@ -278,9 +322,9 @@
             If portState = True Then
                 'Transmit and receive data from Qy@ analog input 1 
                 AnalogIn()
+                timerloop += 1                  'Increase timer loop for each tic of timer
                 'CollectData()
-                'MaxMin()
-                'Graph()
+
             End If
         End If
 
@@ -369,6 +413,8 @@
 
     End Function
 
+
+
     'Asynchronous Serial receive subroutine triggered by serial receive event
     Private Sub DataReceived(sender As Object, e As EventArgs) Handles SerialPort1.DataReceived
         receiveCount += 1                                           'Increment recieve byte counter
@@ -431,6 +477,7 @@
         BaudRateLabel.Text = baud
     End Sub
 
+    'Set sample rate of timer
     Sub SampleRate()
         SampleRateComboBox.Items.Clear()
         SampleRateComboBox.Items.Add(10)
@@ -440,12 +487,6 @@
         SampleRateComboBox.Items.Add(5000)
         SampleRateComboBox.Items.Add(10000)
         SampleRateComboBox.Items.Add(60000)
-        'Timer1.Interval = 1
-        'Timer1.Interval = 100
-        'Timer1.Interval = 500
-        'Timer1.Interval = 1000
-        'Timer1.Interval = 5000
-        'Timer1.Interval = 10000
     End Sub
 
     'Selects com port when selected in combo box
@@ -463,7 +504,7 @@
 
         ElseIf SampleRateComboBox.SelectedItem > 0 Then
             Timer1.Interval = SampleRateComboBox.SelectedItem
-            SampleRateLabel.Text = SampleRateComboBox.SelectedItem
+            SampleRateLabel.Text = SampleRateComboBox.SelectedItem & " " & "ms"
         End If
 
     End Sub
@@ -526,9 +567,8 @@
         SerialPort1.StopBits = IO.Ports.StopBits.One   '1 stop bit
         SerialPort1.Parity = IO.Ports.Parity.None      'no Parity
 
-        Timer1.Enabled = True                           'timer set to 1 ms
+        Timer1.Enabled = False                          'timer disabled
         AnIn1CheckBox.Checked = False                   'Input disabled
-
 
         drivePath = CurDir()
         fileName = drivePath & "\ScopeSettings.txt"             'File found in debug folder of project
@@ -559,6 +599,10 @@
         End Try
 
         SampleRate()
+
+        DateDisplay()
+        drivePath2 = CurDir()
+        fileName2 = CurDir() & "\TemperatureData.txt" '& dateTemp & timeTemp & ".txt"
     End Sub
 
     'Closes Serial Ports when forms closes
@@ -574,69 +618,8 @@
         Me.Close()
     End Sub
 
-    'Activates selected comport
-    'Private Sub PortOpenButton_Click(sender As Object, e As EventArgs) Handles PortOpenButton.Click
-    'Load_setting()
-    'If PortOpenButton.Text = "Connect" Then                     'Com port is disconnected. Press button to connect.
-    '    Try
-    '        SerialPort1.Open()
-    '        PortOpenButton.Text = "Disconnect"                  'Displays that com port is connected
-    '        portState = True                                    'To disconnect press button again
-    '    Catch ex As Exception
-    '        MsgBox("Port Already Open or Port Unavailable")     'Com port is disconnected. Press button to connect.
-    '        PortOpenButton.Text = "Connect"
-    '        portState = False
-    '    End Try
-    'Else                                                        'Com port is disconnected. Press button to connect.
-    '    Try                                                     'Com port stays disconned until button is pressed
-    '        SerialPort1.Close()
-    '    Catch ex As Exception
-
-    '    End Try
-    '    portState = False
-    '    PortOpenButton.Text = "Connect"
-    'End If
-    'End Sub
-
-    'Saves set values to file
-    'Private Sub SaveButton_Click(sender As Object, e As EventArgs) Handles SaveButton.Click
-    '    Try
-    '        FileOpen(1, fileName, OpenMode.Output)                 'Open file for write
-    '    Catch ex As Exception
-
-    '    End Try
-
-    '    WriteLine(1, ComPortComboBox.SelectedItem, BaudRateComboBox.SelectedItem) 'Write file
-    '    FileClose(1)                                                'Closes file
-    'End Sub
-
-    'Button -Loads saved setting of com port and baud rate when presssed
-    'Private Sub LoadButton_Click(sender As Object, e As EventArgs) Handles LoadButton.Click
-    '    Load_setting()                                      'Reads file
-    '    Try
-    '        SerialPort1.Close()                             'Try to close port before change
-    '    Catch ex As Exception
-
-    '    End Try
-
-    '    ConnectToolStripMenuItem.Text = "Connect"
-    '    portState = False
-
-    '    SerialPort1.BaudRate = baud 'See if baud rate data is in the list box
-    '    SerialPort1.PortName = port 'Bot baud rate, save port name
-    'End Sub
 
 
 
-
-    'Opens form 2 to set com port and baud rate of input device
-    'Private Sub SettingsButton_Click(sender As Object, e As EventArgs) Handles SettingsButton.Click
-    '    Form2.Show()                            'Open form 2
-    '    Try
-    '        SerialPort1.Close()                 'Close serial port
-    '    Catch ex As Exception
-
-    '    End Try
-    'End Sub
 
 End Class

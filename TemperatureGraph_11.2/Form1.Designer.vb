@@ -70,6 +70,10 @@ Partial Class Form1
         Me.BaudRateLabel = New System.Windows.Forms.Label()
         Me.ComPortLabel = New System.Windows.Forms.Label()
         Me.SampleRateLabel = New System.Windows.Forms.Label()
+        Me.RefreshButton = New System.Windows.Forms.Button()
+        Me.DateLabel = New System.Windows.Forms.Label()
+        Me.TimeLabel = New System.Windows.Forms.Label()
+        Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -355,14 +359,14 @@ Partial Class Form1
         '
         Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ComPortToolStripMenuItem, Me.BaudRateToolStripMenuItem, Me.SampleRateToolStripMenuItem, Me.SaveSettingsToolStripMenuItem, Me.LoadSettingsToolStripMenuItem, Me.ConnectToolStripMenuItem})
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(92, 29)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(92, 32)
         Me.SettingsToolStripMenuItem.Text = "Settings"
         '
         'ComPortToolStripMenuItem
         '
         Me.ComPortToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ComPortComboBox})
         Me.ComPortToolStripMenuItem.Name = "ComPortToolStripMenuItem"
-        Me.ComPortToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
+        Me.ComPortToolStripMenuItem.Size = New System.Drawing.Size(222, 34)
         Me.ComPortToolStripMenuItem.Text = "Com Port"
         '
         'ComPortComboBox
@@ -374,7 +378,7 @@ Partial Class Form1
         '
         Me.BaudRateToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BaudRateComboBox})
         Me.BaudRateToolStripMenuItem.Name = "BaudRateToolStripMenuItem"
-        Me.BaudRateToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
+        Me.BaudRateToolStripMenuItem.Size = New System.Drawing.Size(222, 34)
         Me.BaudRateToolStripMenuItem.Text = "Baud Rate"
         '
         'BaudRateComboBox
@@ -386,7 +390,7 @@ Partial Class Form1
         '
         Me.SampleRateToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SampleRateComboBox})
         Me.SampleRateToolStripMenuItem.Name = "SampleRateToolStripMenuItem"
-        Me.SampleRateToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
+        Me.SampleRateToolStripMenuItem.Size = New System.Drawing.Size(222, 34)
         Me.SampleRateToolStripMenuItem.Text = "Sample Rate"
         '
         'SampleRateComboBox
@@ -397,19 +401,19 @@ Partial Class Form1
         'SaveSettingsToolStripMenuItem
         '
         Me.SaveSettingsToolStripMenuItem.Name = "SaveSettingsToolStripMenuItem"
-        Me.SaveSettingsToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
+        Me.SaveSettingsToolStripMenuItem.Size = New System.Drawing.Size(222, 34)
         Me.SaveSettingsToolStripMenuItem.Text = "Save Settings"
         '
         'LoadSettingsToolStripMenuItem
         '
         Me.LoadSettingsToolStripMenuItem.Name = "LoadSettingsToolStripMenuItem"
-        Me.LoadSettingsToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
+        Me.LoadSettingsToolStripMenuItem.Size = New System.Drawing.Size(222, 34)
         Me.LoadSettingsToolStripMenuItem.Text = "Load Settings"
         '
         'ConnectToolStripMenuItem
         '
         Me.ConnectToolStripMenuItem.Name = "ConnectToolStripMenuItem"
-        Me.ConnectToolStripMenuItem.Size = New System.Drawing.Size(270, 34)
+        Me.ConnectToolStripMenuItem.Size = New System.Drawing.Size(222, 34)
         Me.ConnectToolStripMenuItem.Text = "Connect "
         '
         'SerialPort1
@@ -461,11 +465,46 @@ Partial Class Form1
         Me.SampleRateLabel.TabIndex = 34
         Me.SampleRateLabel.Text = "Sample Rate"
         '
+        'RefreshButton
+        '
+        Me.RefreshButton.Location = New System.Drawing.Point(350, 431)
+        Me.RefreshButton.Name = "RefreshButton"
+        Me.RefreshButton.Size = New System.Drawing.Size(148, 36)
+        Me.RefreshButton.TabIndex = 35
+        Me.RefreshButton.Text = "Refresh ListBox"
+        Me.RefreshButton.UseVisualStyleBackColor = True
+        '
+        'DateLabel
+        '
+        Me.DateLabel.AutoSize = True
+        Me.DateLabel.Location = New System.Drawing.Point(245, 6)
+        Me.DateLabel.Name = "DateLabel"
+        Me.DateLabel.Size = New System.Drawing.Size(44, 20)
+        Me.DateLabel.TabIndex = 36
+        Me.DateLabel.Text = "Date"
+        '
+        'TimeLabel
+        '
+        Me.TimeLabel.AutoSize = True
+        Me.TimeLabel.Location = New System.Drawing.Point(381, 6)
+        Me.TimeLabel.Name = "TimeLabel"
+        Me.TimeLabel.Size = New System.Drawing.Size(39, 20)
+        Me.TimeLabel.TabIndex = 37
+        Me.TimeLabel.Text = "time"
+        '
+        'Timer2
+        '
+        Me.Timer2.Enabled = True
+        Me.Timer2.Interval = 1
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1184, 479)
+        Me.Controls.Add(Me.TimeLabel)
+        Me.Controls.Add(Me.DateLabel)
+        Me.Controls.Add(Me.RefreshButton)
         Me.Controls.Add(Me.SampleRateLabel)
         Me.Controls.Add(Me.ComPortLabel)
         Me.Controls.Add(Me.BaudRateLabel)
@@ -559,4 +598,8 @@ Partial Class Form1
     Friend WithEvents LoadSettingsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SampleRateComboBox As ToolStripComboBox
     Friend WithEvents SampleRateLabel As Label
+    Friend WithEvents RefreshButton As Button
+    Friend WithEvents DateLabel As Label
+    Friend WithEvents TimeLabel As Label
+    Friend WithEvents Timer2 As Timer
 End Class
