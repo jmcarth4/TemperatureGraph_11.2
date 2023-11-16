@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form1
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form1
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.QuitButton = New System.Windows.Forms.Button()
@@ -74,13 +74,15 @@ Partial Class Form1
         Me.DateLabel = New System.Windows.Forms.Label()
         Me.TimeLabel = New System.Windows.Forms.Label()
         Me.Timer2 = New System.Windows.Forms.Timer(Me.components)
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.AutoGraphCheckBox = New System.Windows.Forms.CheckBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'QuitButton
         '
-        Me.QuitButton.Location = New System.Drawing.Point(1096, 433)
+        Me.QuitButton.Location = New System.Drawing.Point(1083, 438)
         Me.QuitButton.Name = "QuitButton"
         Me.QuitButton.Size = New System.Drawing.Size(89, 36)
         Me.QuitButton.TabIndex = 0
@@ -99,7 +101,7 @@ Partial Class Form1
         'MinLabel
         '
         Me.MinLabel.AutoSize = True
-        Me.MinLabel.Location = New System.Drawing.Point(660, 359)
+        Me.MinLabel.Location = New System.Drawing.Point(707, 354)
         Me.MinLabel.Name = "MinLabel"
         Me.MinLabel.Size = New System.Drawing.Size(34, 20)
         Me.MinLabel.TabIndex = 2
@@ -108,7 +110,7 @@ Partial Class Form1
         'MaxLabel
         '
         Me.MaxLabel.AutoSize = True
-        Me.MaxLabel.Location = New System.Drawing.Point(731, 359)
+        Me.MaxLabel.Location = New System.Drawing.Point(778, 354)
         Me.MaxLabel.Name = "MaxLabel"
         Me.MaxLabel.Size = New System.Drawing.Size(38, 20)
         Me.MaxLabel.TabIndex = 3
@@ -117,11 +119,11 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(223, 306)
+        Me.Label1.Location = New System.Drawing.Point(263, 331)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(46, 20)
+        Me.Label1.Size = New System.Drawing.Size(50, 20)
         Me.Label1.TabIndex = 4
-        Me.Label1.Text = "value"
+        Me.Label1.Text = "Value"
         '
         'Timer1
         '
@@ -130,35 +132,35 @@ Partial Class Form1
         '
         'TempGButton
         '
-        Me.TempGButton.Location = New System.Drawing.Point(1, 433)
+        Me.TempGButton.Location = New System.Drawing.Point(5, 431)
         Me.TempGButton.Name = "TempGButton"
-        Me.TempGButton.Size = New System.Drawing.Size(81, 36)
+        Me.TempGButton.Size = New System.Drawing.Size(106, 36)
         Me.TempGButton.TabIndex = 5
         Me.TempGButton.Text = "Graph Temperature"
         Me.TempGButton.UseVisualStyleBackColor = True
         '
         'TestButton
         '
-        Me.TestButton.Location = New System.Drawing.Point(531, 326)
+        Me.TestButton.Location = New System.Drawing.Point(385, 402)
         Me.TestButton.Name = "TestButton"
-        Me.TestButton.Size = New System.Drawing.Size(113, 70)
+        Me.TestButton.Size = New System.Drawing.Size(163, 29)
         Me.TestButton.TabIndex = 6
-        Me.TestButton.Text = "Test Graph Stuff"
+        Me.TestButton.Text = "Graphing Test"
         Me.TestButton.UseVisualStyleBackColor = True
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(223, 431)
+        Me.Label2.Location = New System.Drawing.Point(263, 436)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(109, 20)
+        Me.Label2.Size = New System.Drawing.Size(117, 20)
         Me.Label2.TabIndex = 7
-        Me.Label2.Text = "graphed value"
+        Me.Label2.Text = "Graphed Value"
         '
         'HcenterLabel
         '
         Me.HcenterLabel.AutoSize = True
-        Me.HcenterLabel.Location = New System.Drawing.Point(-3, 149)
+        Me.HcenterLabel.Location = New System.Drawing.Point(14, 155)
         Me.HcenterLabel.Name = "HcenterLabel"
         Me.HcenterLabel.Size = New System.Drawing.Size(54, 20)
         Me.HcenterLabel.TabIndex = 8
@@ -167,7 +169,7 @@ Partial Class Form1
         'HtopLabel
         '
         Me.HtopLabel.AutoSize = True
-        Me.HtopLabel.Location = New System.Drawing.Point(-3, 29)
+        Me.HtopLabel.Location = New System.Drawing.Point(14, 29)
         Me.HtopLabel.Name = "HtopLabel"
         Me.HtopLabel.Size = New System.Drawing.Size(32, 20)
         Me.HtopLabel.TabIndex = 9
@@ -176,7 +178,7 @@ Partial Class Form1
         'h2Label
         '
         Me.h2Label.AutoSize = True
-        Me.h2Label.Location = New System.Drawing.Point(-3, 85)
+        Me.h2Label.Location = New System.Drawing.Point(14, 88)
         Me.h2Label.Name = "h2Label"
         Me.h2Label.Size = New System.Drawing.Size(45, 20)
         Me.h2Label.TabIndex = 10
@@ -185,7 +187,7 @@ Partial Class Form1
         'h1Label
         '
         Me.h1Label.AutoSize = True
-        Me.h1Label.Location = New System.Drawing.Point(-3, 208)
+        Me.h1Label.Location = New System.Drawing.Point(14, 226)
         Me.h1Label.Name = "h1Label"
         Me.h1Label.Size = New System.Drawing.Size(45, 20)
         Me.h1Label.TabIndex = 11
@@ -194,7 +196,7 @@ Partial Class Form1
         'HBottomLabel
         '
         Me.HBottomLabel.AutoSize = True
-        Me.HBottomLabel.Location = New System.Drawing.Point(-3, 267)
+        Me.HBottomLabel.Location = New System.Drawing.Point(14, 283)
         Me.HBottomLabel.Name = "HBottomLabel"
         Me.HBottomLabel.Size = New System.Drawing.Size(59, 20)
         Me.HBottomLabel.TabIndex = 12
@@ -203,7 +205,7 @@ Partial Class Form1
         'ScaleLabel
         '
         Me.ScaleLabel.AutoSize = True
-        Me.ScaleLabel.Location = New System.Drawing.Point(223, 375)
+        Me.ScaleLabel.Location = New System.Drawing.Point(263, 391)
         Me.ScaleLabel.Name = "ScaleLabel"
         Me.ScaleLabel.Size = New System.Drawing.Size(49, 20)
         Me.ScaleLabel.TabIndex = 13
@@ -212,7 +214,7 @@ Partial Class Form1
         'InvtertLabel
         '
         Me.InvtertLabel.AutoSize = True
-        Me.InvtertLabel.Location = New System.Drawing.Point(223, 326)
+        Me.InvtertLabel.Location = New System.Drawing.Point(263, 351)
         Me.InvtertLabel.Name = "InvtertLabel"
         Me.InvtertLabel.Size = New System.Drawing.Size(49, 20)
         Me.InvtertLabel.TabIndex = 14
@@ -221,7 +223,7 @@ Partial Class Form1
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(117, 326)
+        Me.Label3.Location = New System.Drawing.Point(138, 351)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(49, 20)
         Me.Label3.TabIndex = 15
@@ -230,16 +232,16 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(117, 306)
+        Me.Label4.Location = New System.Drawing.Point(135, 331)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(46, 20)
+        Me.Label4.Size = New System.Drawing.Size(100, 20)
         Me.Label4.TabIndex = 16
-        Me.Label4.Text = "value"
+        Me.Label4.Text = "Temperature"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(124, 371)
+        Me.Label5.Location = New System.Drawing.Point(138, 391)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(49, 20)
         Me.Label5.TabIndex = 17
@@ -248,16 +250,16 @@ Partial Class Form1
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(99, 431)
+        Me.Label6.Location = New System.Drawing.Point(138, 436)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(109, 20)
+        Me.Label6.Size = New System.Drawing.Size(117, 20)
         Me.Label6.TabIndex = 18
-        Me.Label6.Text = "graphed value"
+        Me.Label6.Text = "Graphed Value"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(120, 391)
+        Me.Label7.Location = New System.Drawing.Point(138, 412)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(53, 20)
         Me.Label7.TabIndex = 19
@@ -266,7 +268,7 @@ Partial Class Form1
         'OffsetLabel
         '
         Me.OffsetLabel.AutoSize = True
-        Me.OffsetLabel.Location = New System.Drawing.Point(219, 395)
+        Me.OffsetLabel.Location = New System.Drawing.Point(263, 411)
         Me.OffsetLabel.Name = "OffsetLabel"
         Me.OffsetLabel.Size = New System.Drawing.Size(53, 20)
         Me.OffsetLabel.TabIndex = 20
@@ -275,7 +277,7 @@ Partial Class Form1
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(117, 351)
+        Me.Label8.Location = New System.Drawing.Point(138, 371)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(57, 20)
         Me.Label8.TabIndex = 21
@@ -284,7 +286,7 @@ Partial Class Form1
         'RangeLabel
         '
         Me.RangeLabel.AutoSize = True
-        Me.RangeLabel.Location = New System.Drawing.Point(215, 351)
+        Me.RangeLabel.Location = New System.Drawing.Point(263, 371)
         Me.RangeLabel.Name = "RangeLabel"
         Me.RangeLabel.Size = New System.Drawing.Size(57, 20)
         Me.RangeLabel.TabIndex = 22
@@ -292,7 +294,7 @@ Partial Class Form1
         '
         'DataButton
         '
-        Me.DataButton.Location = New System.Drawing.Point(5, 314)
+        Me.DataButton.Location = New System.Drawing.Point(5, 315)
         Me.DataButton.Name = "DataButton"
         Me.DataButton.Size = New System.Drawing.Size(106, 45)
         Me.DataButton.TabIndex = 23
@@ -301,9 +303,9 @@ Partial Class Form1
         '
         'MaxMinButton
         '
-        Me.MaxMinButton.Location = New System.Drawing.Point(1, 366)
+        Me.MaxMinButton.Location = New System.Drawing.Point(5, 366)
         Me.MaxMinButton.Name = "MaxMinButton"
-        Me.MaxMinButton.Size = New System.Drawing.Size(113, 62)
+        Me.MaxMinButton.Size = New System.Drawing.Size(106, 62)
         Me.MaxMinButton.TabIndex = 24
         Me.MaxMinButton.Text = "Find max and min"
         Me.MaxMinButton.UseVisualStyleBackColor = True
@@ -320,7 +322,7 @@ Partial Class Form1
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(660, 326)
+        Me.Label9.Location = New System.Drawing.Point(707, 321)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(78, 20)
         Me.Label9.TabIndex = 26
@@ -329,7 +331,7 @@ Partial Class Form1
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(744, 326)
+        Me.Label10.Location = New System.Drawing.Point(791, 321)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(82, 20)
         Me.Label10.TabIndex = 27
@@ -337,9 +339,9 @@ Partial Class Form1
         '
         'GraphInButton
         '
-        Me.GraphInButton.Location = New System.Drawing.Point(302, 314)
+        Me.GraphInButton.Location = New System.Drawing.Point(385, 319)
         Me.GraphInButton.Name = "GraphInButton"
-        Me.GraphInButton.Size = New System.Drawing.Size(114, 45)
+        Me.GraphInButton.Size = New System.Drawing.Size(163, 37)
         Me.GraphInButton.TabIndex = 28
         Me.GraphInButton.Text = "Graph Input"
         Me.GraphInButton.UseVisualStyleBackColor = True
@@ -359,8 +361,8 @@ Partial Class Form1
         '
         Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ComPortToolStripMenuItem, Me.BaudRateToolStripMenuItem, Me.SampleRateToolStripMenuItem, Me.SaveSettingsToolStripMenuItem, Me.LoadSettingsToolStripMenuItem, Me.ConnectToolStripMenuItem})
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(92, 32)
-        Me.SettingsToolStripMenuItem.Text = "Settings"
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(151, 32)
+        Me.SettingsToolStripMenuItem.Text = "Sensor Settings"
         '
         'ComPortToolStripMenuItem
         '
@@ -422,7 +424,7 @@ Partial Class Form1
         'VA1Label
         '
         Me.VA1Label.AutoSize = True
-        Me.VA1Label.Location = New System.Drawing.Point(672, 420)
+        Me.VA1Label.Location = New System.Drawing.Point(746, 428)
         Me.VA1Label.Name = "VA1Label"
         Me.VA1Label.Size = New System.Drawing.Size(36, 20)
         Me.VA1Label.TabIndex = 30
@@ -431,7 +433,7 @@ Partial Class Form1
         'AnIn1CheckBox
         '
         Me.AnIn1CheckBox.AutoSize = True
-        Me.AnIn1CheckBox.Location = New System.Drawing.Point(531, 420)
+        Me.AnIn1CheckBox.Location = New System.Drawing.Point(578, 325)
         Me.AnIn1CheckBox.Name = "AnIn1CheckBox"
         Me.AnIn1CheckBox.Size = New System.Drawing.Size(86, 24)
         Me.AnIn1CheckBox.TabIndex = 31
@@ -441,7 +443,7 @@ Partial Class Form1
         'BaudRateLabel
         '
         Me.BaudRateLabel.AutoSize = True
-        Me.BaudRateLabel.Location = New System.Drawing.Point(744, 6)
+        Me.BaudRateLabel.Location = New System.Drawing.Point(813, 6)
         Me.BaudRateLabel.Name = "BaudRateLabel"
         Me.BaudRateLabel.Size = New System.Drawing.Size(86, 20)
         Me.BaudRateLabel.TabIndex = 32
@@ -450,7 +452,7 @@ Partial Class Form1
         'ComPortLabel
         '
         Me.ComPortLabel.AutoSize = True
-        Me.ComPortLabel.Location = New System.Drawing.Point(633, 6)
+        Me.ComPortLabel.Location = New System.Drawing.Point(681, 6)
         Me.ComPortLabel.Name = "ComPortLabel"
         Me.ComPortLabel.Size = New System.Drawing.Size(75, 20)
         Me.ComPortLabel.TabIndex = 33
@@ -459,7 +461,7 @@ Partial Class Form1
         'SampleRateLabel
         '
         Me.SampleRateLabel.AutoSize = True
-        Me.SampleRateLabel.Location = New System.Drawing.Point(515, 6)
+        Me.SampleRateLabel.Location = New System.Drawing.Point(502, 6)
         Me.SampleRateLabel.Name = "SampleRateLabel"
         Me.SampleRateLabel.Size = New System.Drawing.Size(102, 20)
         Me.SampleRateLabel.TabIndex = 34
@@ -467,11 +469,11 @@ Partial Class Form1
         '
         'RefreshButton
         '
-        Me.RefreshButton.Location = New System.Drawing.Point(350, 431)
+        Me.RefreshButton.Location = New System.Drawing.Point(385, 360)
         Me.RefreshButton.Name = "RefreshButton"
-        Me.RefreshButton.Size = New System.Drawing.Size(148, 36)
+        Me.RefreshButton.Size = New System.Drawing.Size(163, 36)
         Me.RefreshButton.TabIndex = 35
-        Me.RefreshButton.Text = "Refresh ListBox"
+        Me.RefreshButton.Text = "Refresh Listed Data"
         Me.RefreshButton.UseVisualStyleBackColor = True
         '
         'DateLabel
@@ -488,20 +490,41 @@ Partial Class Form1
         Me.TimeLabel.AutoSize = True
         Me.TimeLabel.Location = New System.Drawing.Point(381, 6)
         Me.TimeLabel.Name = "TimeLabel"
-        Me.TimeLabel.Size = New System.Drawing.Size(39, 20)
+        Me.TimeLabel.Size = New System.Drawing.Size(43, 20)
         Me.TimeLabel.TabIndex = 37
-        Me.TimeLabel.Text = "time"
+        Me.TimeLabel.Text = "Time"
         '
         'Timer2
         '
         Me.Timer2.Enabled = True
         Me.Timer2.Interval = 1
         '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(744, 402)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(99, 20)
+        Me.Label11.TabIndex = 38
+        Me.Label11.Text = "Sensor input"
+        '
+        'AutoGraphCheckBox
+        '
+        Me.AutoGraphCheckBox.AutoSize = True
+        Me.AutoGraphCheckBox.Location = New System.Drawing.Point(578, 367)
+        Me.AutoGraphCheckBox.Name = "AutoGraphCheckBox"
+        Me.AutoGraphCheckBox.Size = New System.Drawing.Size(112, 24)
+        Me.AutoGraphCheckBox.TabIndex = 39
+        Me.AutoGraphCheckBox.Text = "Live Graph"
+        Me.AutoGraphCheckBox.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1184, 479)
+        Me.Controls.Add(Me.AutoGraphCheckBox)
+        Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.TimeLabel)
         Me.Controls.Add(Me.DateLabel)
         Me.Controls.Add(Me.RefreshButton)
@@ -602,4 +625,6 @@ Partial Class Form1
     Friend WithEvents DateLabel As Label
     Friend WithEvents TimeLabel As Label
     Friend WithEvents Timer2 As Timer
+    Friend WithEvents Label11 As Label
+    Friend WithEvents AutoGraphCheckBox As CheckBox
 End Class

@@ -1,6 +1,5 @@
 ﻿
-'Option Strict On
-'Option Explicit On
+
 
 
 Public Class Form1
@@ -29,6 +28,7 @@ Public Class Form1
     Dim fileName2 As String
     Dim dateTemp As String
     Dim timeTemp As String
+    Dim both As String
     Dim port As String                          'Set port name
     Dim baud As String                          'Set baud rate
 
@@ -40,48 +40,10 @@ Public Class Form1
     Dim receiveCount, TransmitCount As Double
     Dim newData As Integer                       'Received data
     Dim dataIn1, dataIn2, dataIn3, dataIn4, dataIn5, dataIn6, dataIn7, dataIn8 As Integer  'Processes data in
-    Public timerloop As Integer
+
     Sub CollectData()
-        ' Dim i As Integer                'Sets index of array.
-
-        Dim recordLength As Integer
-        Dim dataLength As Integer
-        ' Dim sensorIn As String
-
-        'Populates array with 96 values  
-        'If AnIn1CheckBox.Checked = True Then
-        '    If timerloop < 96 Then
-
-        '        dataLength = timerloop
-        '    Else
-
-        '        dataLength = 95
-        '    End If
-        'ElseIf AnIn1CheckBox.Checked = False Then
-        '    dataLength = 95
-        'End If
-
-        For i = 0 To 95 'dataLength
-
-            ' If AnIn1CheckBox.Checked = True Then
-
-
-
-
-
-            'If timerloop < 96 Then
-
-            '    recordLength = timerloop
-            'Else
-
-            '    recordLength = 96
-            'End If
-
-            ' ElseIf AnIn1CheckBox.Checked = False Then
+        For i = 0 To 95
             data(i) = CInt((Rnd() * 100) + 32)
-            'recordLength = 96
-            ' End If
-
         Next
 
         DisplayArray()
@@ -101,22 +63,8 @@ Public Class Form1
         SaveFile()
     End Sub
 
-    Sub ShiftArray(newRead As Double)
-
-        For i = LBound(data) To UBound(data) - 1
-            data(i) = data(i + 1)
-        Next
-
-        data(95) = newRead
-    End Sub
-
-
-
-
 
     Sub SaveFile()
-
-
         Try
             FileOpen(1, Me.fileName2, OpenMode.Append) 'Open file for Append
         Catch ex As Exception
@@ -133,6 +81,25 @@ Public Class Form1
         FileClose(1)
 
     End Sub
+    Sub ShiftArray(newRead As Double)
+        If portState = True Then
+
+            For i = LBound(data) To UBound(data) - 1
+                data(i) = data(i + 1)
+            Next
+            data(95) = newRead
+        Else portState = False
+            For i = 0 To 95
+                data(i) = 0
+            Next
+
+        End If
+
+
+
+    End Sub
+
+
 
     'Establishs communication and displays received data from Qy@ board, analog input1
     Sub AnalogIn()
@@ -141,7 +108,7 @@ Public Class Form1
         TXdata(2) = 0
         SendData()                              'Calls function to send serial data
         AnVoltage()                             'Calls function to calcuate input voltage 
-        VA1Label.Text = vOut                    'Display input voltage
+        VA1Label.Text = vOut & "V"                    'Display input voltage
     End Sub
 
     'Converts received byte 1 and 2 to binary value (0 to 1024) and voltage (0 to 3.3)
@@ -151,16 +118,16 @@ Public Class Form1
         Dim n2 As Double
         Dim n3 As Double
         Dim n4 As Double
-
+        Dim vTemp As Double
         n1 = dataIn1 * 4
         n2 = dataIn2 / 64
         n3 = Fix(n1 + n2)               'Calcuated number of bits recieved
         n4 = 3.3 / 1023
         vPort = n4 * n3
+        vTemp = vPort * 100
         vOut = Format(vPort, "n")       'Calculated voltage at input
 
-        ShiftArray(vPort)
-
+        ShiftArray(vTemp)
     End Sub
 
     'Sends byte array to serial port
@@ -218,20 +185,17 @@ Public Class Form1
         For i = 0 To 95
 
             If data(i) < currentMin Then
-                MinLabel.Text = data(i)
+                MinLabel.Text = data(i).ToString("n")
 
                 minTemp = data(i)
                 currentMin = data(i)
             End If
             If data(i) > currentMax Then
-                MaxLabel.Text = data(i)
+                MaxLabel.Text = data(i).ToString("n")
 
                 maxTemp = data(i)
                 currentMax = data(i)
             End If
-
-
-
 
         Next
         minTemp = MinLabel.Text
@@ -267,15 +231,15 @@ Public Class Form1
                 ElseIf range <> 0 Then
                     scale = PictureBox1.Height / range            'Set scale
                 End If                                            'Do not round or fix !!!!! 
-                ScaleLabel.Text = scale                            'Need exact value to several decimals to scale correctly!!
+                ScaleLabel.Text = scale.ToString("n")                            'Need exact value to several decimals to scale correctly!!
 
                 'offset = 30                                    'Not need?
-                'OffsetLabel.Text = offset
+                OffsetLabel.Text = "n/a"
 
                 graphF = PictureBox1.Height - (scale * inv)
                 Label2.Text = graphF
 
-                'PictureBox1.CreateGraphics.DrawLine(Pens.DarkSeaGreen, lastX, lastY, loopX, graphF)
+
                 PictureBox1.CreateGraphics.DrawLine(Pens.DarkSeaGreen, loopX, graphF, lastX, lastY)
                 lastX = loopX
 
@@ -294,7 +258,7 @@ Public Class Form1
         Dim h2 As Integer
 
         hC = PictureBox1.Height * 0.5
-        penColor = Pens.Gray
+        penColor = Pens.LightGray
         PictureBox1.CreateGraphics.DrawLine(penColor, 0, hC, PictureBox1.Width, hC)
 
         h1 = PictureBox1.Height * 0.75
@@ -306,7 +270,7 @@ Public Class Form1
         PictureBox1.CreateGraphics.DrawLine(penColor, 0, h2, PictureBox1.Width, h2)
 
         hMax = PictureBox1.Height - 5
-        penColor = Pens.Blue
+        penColor = Pens.CornflowerBlue
         PictureBox1.CreateGraphics.DrawLine(penColor, 0, hMax, PictureBox1.Width, hMax)
 
         hMin = 5
@@ -391,9 +355,11 @@ Public Class Form1
     End Sub
 
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
+
         DateDisplay()
         DateLabel.Text = dateTemp
         TimeLabel.Text = timeTemp
+
     End Sub
 
     Private Sub DataButton_Click(sender As Object, e As EventArgs) Handles DataButton.Click
@@ -426,7 +392,6 @@ Public Class Form1
 
     Private Sub AnIn1CheckBox_CheckedChanged(sender As Object, e As EventArgs) Handles AnIn1CheckBox.CheckedChanged
         Timer1.Enabled = True
-        timerloop = 0
     End Sub
 
     Private Sub RefreshButton_Click(sender As Object, e As EventArgs) Handles RefreshButton.Click
@@ -447,11 +412,11 @@ Public Class Form1
             If portState = True Then
                 'Transmit and receive data from Qy@ analog input 1 
                 AnalogIn()
-                timerloop += 1                  'Increase timer loop for each tic of timer
-                'CollectData()
-                DisplayArray()
-                MaxMin()
-                Graph()
+                If AutoGraphCheckBox.Checked = True Then
+                    DisplayArray()
+                    MaxMin()
+                    Graph()
+                End If
 
             End If
         End If
@@ -622,6 +587,8 @@ Public Class Form1
         End If
     End Sub
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
         portState = False                              'Disables serial port
 
         SerialPort1.BaudRate = 9600                    '9600 baud rate
@@ -631,7 +598,7 @@ Public Class Form1
 
         Timer1.Enabled = False                          'timer disabled
         AnIn1CheckBox.Checked = False                   'Input disabled
-
+        AutoGraphCheckBox.Checked = False
         drivePath = CurDir()
         fileName = drivePath & "\ScopeSettings.txt"             'File found in debug folder of project
 
@@ -651,8 +618,6 @@ Public Class Form1
         SampleRate()
 
         DateDisplay()
-
-
         drivePath2 = CurDir()
         Me.fileName2 = CurDir() & "\TemperatureData" & dateTemp & ".txt"
     End Sub
