@@ -49,38 +49,38 @@ Public Class Form1
         ' Dim sensorIn As String
 
         'Populates array with 96 values  
-        If AnIn1CheckBox.Checked = True Then
-            If timerloop < 96 Then
+        'If AnIn1CheckBox.Checked = True Then
+        '    If timerloop < 96 Then
 
-                dataLength = timerloop
-            Else
+        '        dataLength = timerloop
+        '    Else
 
-                dataLength = 95
-            End If
-        ElseIf AnIn1CheckBox.Checked = False Then
-            dataLength = 95
-        End If
+        '        dataLength = 95
+        '    End If
+        'ElseIf AnIn1CheckBox.Checked = False Then
+        '    dataLength = 95
+        'End If
 
-        For i = 0 To dataLength
+        For i = 0 To 95 'dataLength
 
-            If AnIn1CheckBox.Checked = True Then
-
-
+            ' If AnIn1CheckBox.Checked = True Then
 
 
 
-                'If timerloop < 96 Then
 
-                '    recordLength = timerloop
-                'Else
 
-                '    recordLength = 96
-                'End If
+            'If timerloop < 96 Then
 
-            ElseIf AnIn1CheckBox.Checked = False Then
-                data(i) = CInt((Rnd() * 100) + 32)
-                'recordLength = 96
-            End If
+            '    recordLength = timerloop
+            'Else
+
+            '    recordLength = 96
+            'End If
+
+            ' ElseIf AnIn1CheckBox.Checked = False Then
+            data(i) = CInt((Rnd() * 100) + 32)
+            'recordLength = 96
+            ' End If
 
         Next
 
@@ -90,8 +90,6 @@ Public Class Form1
 
     Sub DisplayArray()
         Dim loopCount As Integer        'Sets loop count of display loop.
-
-
 
         DataListBox.Items.Clear()                          'Clears listbox
 
@@ -114,6 +112,100 @@ Public Class Form1
 
 
 
+
+
+    Sub SaveFile()
+
+
+        Try
+            FileOpen(1, Me.fileName2, OpenMode.Append) 'Open file for Append
+        Catch ex As Exception
+
+        End Try
+
+        For i = 0 To 95
+            WriteLine(1, data(i) & " " & dateTemp & " " & timeTemp)
+
+            ' WriteLine(1, " ")
+        Next
+
+
+        FileClose(1)
+
+    End Sub
+
+    'Establishs communication and displays received data from Qy@ board, analog input1
+    Sub AnalogIn()
+        TXdata(0) = 81                          'Send command for analog input 1
+        TXdata(1) = 0
+        TXdata(2) = 0
+        SendData()                              'Calls function to send serial data
+        AnVoltage()                             'Calls function to calcuate input voltage 
+        VA1Label.Text = vOut                    'Display input voltage
+    End Sub
+
+    'Converts received byte 1 and 2 to binary value (0 to 1024) and voltage (0 to 3.3)
+    Sub AnVoltage()
+        Dim vPort As Double             'Variables to manipulate received data
+        Dim n1 As Double
+        Dim n2 As Double
+        Dim n3 As Double
+        Dim n4 As Double
+
+        n1 = dataIn1 * 4
+        n2 = dataIn2 / 64
+        n3 = Fix(n1 + n2)               'Calcuated number of bits recieved
+        n4 = 3.3 / 1023
+        vPort = n4 * n3
+        vOut = Format(vPort, "n")       'Calculated voltage at input
+
+        ShiftArray(vPort)
+
+    End Sub
+
+    'Sends byte array to serial port
+    Function SendData() As Byte
+        Timer1.Enabled = False                                 'Disable timer when writing to serial port
+        If portState = True Then
+            SerialPort1.Write(TXdata, 0, 3)                    'Write byte array to serial port
+        Else
+            MsgBox("Please configure and open serial port to procede")      'Send user message box if no port connected
+        End If
+        Timer1.Enabled = True                                   'Enable timer when done
+
+    End Function
+
+    'Asynchronous Serial receive subroutine triggered by serial receive event
+    Private Sub DataReceived(sender As Object, e As EventArgs) Handles SerialPort1.DataReceived
+        receiveCount += 1                                           'Increment recieve byte counter
+        SerialPort1.Read(receiveByte, 0, 4)                         'Read serial buffer value
+
+        Select Case newData                                         'Test case to determine where to place info
+            Case = 0
+
+                dataIn1 = receiveByte(0)
+            Case = 1
+                dataIn2 = receiveByte(0)
+            Case = 2
+                dataIn3 = receiveByte(0)
+            Case = 3
+                dataIn4 = receiveByte(0)
+            Case = 4
+                dataIn5 = receiveByte(0)
+            Case = 5
+                dataIn6 = receiveByte(0)
+            Case = 6
+                dataIn7 = receiveByte(0)
+            Case = 7
+                dataIn8 = receiveByte(0)
+
+            Case Else
+                newData = 0                                             'Possible over flow, reset newData
+                Exit Sub
+
+        End Select
+        newData += 1                                                    'Increment newData once loop is complete
+    End Sub
 
 
     Sub MaxMin()
@@ -194,7 +286,6 @@ Public Class Form1
         GraphLabels()
     End Sub
 
-
     Sub Hdivisions()
         Dim hC As Integer
         Dim hMax As Integer
@@ -234,29 +325,69 @@ Public Class Form1
     End Sub
 
     Sub DateDisplay()
+
         dateTemp = DateString
         timeTemp = TimeString
 
     End Sub
 
-    Sub SaveFile()
 
-
+    'Sets com port and baud rate 
+    Sub ReadComPorts()
+        portState = False
         Try
-            FileOpen(1, Me.fileName2, OpenMode.Append) 'Open file for Append
+            SerialPort1.BaudRate = ComPortComboBox.SelectedItem 'See if baud rate data is in the list box
         Catch ex As Exception
+            SerialPort1.PortName = ComPortComboBox.SelectedItem 'Bot baud rate, save port name
+        End Try
+    End Sub
 
+    'Loads and reads settings file
+    Public Sub Load_setting()
+        drivePath = CurDir()
+        fileName = drivePath & "\ScopeSettings.txt"               'File found in debug folder of project
+        Try
+            FileOpen(1, fileName, OpenMode.Input)                 'Open file for read
+        Catch ex As Exception
+            MsgBox("Settings file not found, please go to settings menu") 'Alerts user if no file found
+            Exit Sub
         End Try
 
-        For i = 0 To 95
-            WriteLine(1, data(i) & dateTemp & timeTemp)
-
-            ' WriteLine(1, " ")
-        Next
-
+        Input(1, port)      'Load port name
+        Input(1, baud)      'Load baud rate
 
         FileClose(1)
 
+        ComPortLabel.Text = port
+        BaudRateLabel.Text = baud
+    End Sub
+
+    Sub BaudRate()
+        BaudRateComboBox.Items.Clear()                          'Clear list box and load baud rate values
+        BaudRateComboBox.Items.Add(1200)
+        BaudRateComboBox.Items.Add(2400)
+        BaudRateComboBox.Items.Add(4800)
+        BaudRateComboBox.Items.Add(9600)
+        BaudRateComboBox.Items.Add(19200)
+        BaudRateComboBox.Items.Add(38400)
+        BaudRateComboBox.Items.Add(57600)
+        BaudRateComboBox.Items.Add(115200)
+        BaudRateComboBox.Items.Add(230400)
+        BaudRateComboBox.Items.Add(230400)
+        BaudRateComboBox.Items.Add(460800)
+        BaudRateComboBox.Items.Add(921600)
+    End Sub
+
+    'Set sample rate of timer
+    Sub SampleRate()
+        SampleRateComboBox.Items.Clear()
+        SampleRateComboBox.Items.Add(10)
+        SampleRateComboBox.Items.Add(100)
+        SampleRateComboBox.Items.Add(500)
+        SampleRateComboBox.Items.Add(1000)
+        SampleRateComboBox.Items.Add(5000)
+        SampleRateComboBox.Items.Add(10000)
+        SampleRateComboBox.Items.Add(60000)
     End Sub
 
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
@@ -265,12 +396,8 @@ Public Class Form1
         TimeLabel.Text = timeTemp
     End Sub
 
-
-
     Private Sub DataButton_Click(sender As Object, e As EventArgs) Handles DataButton.Click
         If AnIn1CheckBox.Checked = True Then
-            ' ShiftArray(newData)
-            'diplay array 
             DisplayArray()
 
         ElseIf AnIn1CheckBox.Checked = False Then
@@ -283,16 +410,17 @@ Public Class Form1
     Private Sub MaxMinButton_Click(sender As Object, e As EventArgs) Handles MaxMinButton.Click
         MaxMin()
     End Sub
-
-
-    Private Sub GraphInButton_Click(sender As Object, e As EventArgs) Handles GraphInButton.Click
-        CollectData()
-        MaxMin()
+    Private Sub TempGButton_Click(sender As Object, e As EventArgs) Handles TempGButton.Click
         Graph()
-
     End Sub
 
-    Private Sub TempGButton_Click(sender As Object, e As EventArgs) Handles TempGButton.Click
+    Private Sub GraphInButton_Click(sender As Object, e As EventArgs) Handles GraphInButton.Click
+        If AnIn1CheckBox.Checked = True Then
+            DisplayArray()
+        ElseIf AnIn1CheckBox.Checked = False Then
+            CollectData()
+        End If
+        MaxMin()
         Graph()
     End Sub
 
@@ -303,52 +431,6 @@ Public Class Form1
 
     Private Sub RefreshButton_Click(sender As Object, e As EventArgs) Handles RefreshButton.Click
         DataListBox.Items.Clear()
-    End Sub
-
-    Private Sub TestButton_Click(sender As Object, e As EventArgs) Handles TestButton.Click
-        Dim record(95) As Integer
-        Dim loopX As Integer
-        Dim tempF As Double
-        Dim graphF As Integer
-
-        lastX = 0
-        lastY = 0
-        Me.Refresh()
-        Hdivisions()
-        For i = 0 To 95
-            Do Until loopX > PictureBox1.Width
-
-                tempF = CInt((Rnd() * 100) + 32)
-
-                record(i) = tempF
-                Label1.Text = tempF
-                graphF = PictureBox1.Height - tempF
-                Label2.Text = graphF
-
-                If loopX = 0 Then
-                    MaxLabel.Text = tempF
-                    MinLabel.Text = tempF
-                Else
-                    If tempF < lastX Then
-                        MinLabel.Text = tempF
-
-                    End If
-                    If tempF > lastX Then
-                        MaxLabel.Text = tempF
-
-                    End If
-                End If
-
-                PictureBox1.CreateGraphics.DrawLine(Pens.White, lastX, lastY, loopX, graphF)
-
-                lastX = loopX
-
-                loopX += (PictureBox1.Width / 96)
-
-                lastY = graphF
-
-            Loop
-        Next
     End Sub
 
 
@@ -421,124 +503,53 @@ Public Class Form1
         End If
     End Sub
 
-    'Establishs communication and displays received data from Qy@ board, analog input1
-    Sub AnalogIn()
-        TXdata(0) = 81                          'Send command for analog input 1
-        TXdata(1) = 0
-        TXdata(2) = 0
-        SendData()                              'Calls function to send serial data
-        AnVoltage()                             'Calls function to calcuate input voltage 
-        VA1Label.Text = vOut                    'Display input voltage
+
+    Private Sub TestButton_Click(sender As Object, e As EventArgs) Handles TestButton.Click
+        Dim record(95) As Integer
+        Dim loopX As Integer
+        Dim tempF As Double
+        Dim graphF As Integer
+
+        lastX = 0
+        lastY = 0
+        Me.Refresh()
+        Hdivisions()
+        For i = 0 To 95
+            Do Until loopX > PictureBox1.Width
+
+                tempF = CInt((Rnd() * 100) + 32)
+
+                record(i) = tempF
+                Label1.Text = tempF
+                graphF = PictureBox1.Height - tempF
+                Label2.Text = graphF
+
+                If loopX = 0 Then
+                    MaxLabel.Text = tempF
+                    MinLabel.Text = tempF
+                Else
+                    If tempF < lastX Then
+                        MinLabel.Text = tempF
+
+                    End If
+                    If tempF > lastX Then
+                        MaxLabel.Text = tempF
+
+                    End If
+                End If
+
+                PictureBox1.CreateGraphics.DrawLine(Pens.White, lastX, lastY, loopX, graphF)
+
+                lastX = loopX
+
+                loopX += (PictureBox1.Width / 96)
+
+                lastY = graphF
+
+            Loop
+        Next
     End Sub
 
-    'Converts received byte 1 and 2 to binary value (0 to 1024) and voltage (0 to 3.3)
-    Sub AnVoltage()
-        Dim vPort As Double             'Variables to manipulate received data
-        Dim n1 As Double
-        Dim n2 As Double
-        Dim n3 As Double
-        Dim n4 As Double
-
-        n1 = dataIn1 * 4
-        n2 = dataIn2 / 64
-        n3 = Fix(n1 + n2)               'Calcuated number of bits recieved
-        n4 = 3.3 / 1023
-        vPort = n4 * n3
-        vOut = Format(vPort, "n")       'Calculated voltage at input
-
-        ShiftArray(vPort)
-
-    End Sub
-
-    'Sends byte array to serial port
-    Function SendData() As Byte
-        Timer1.Enabled = False                                 'Disable timer when writing to serial port
-        If portState = True Then
-            SerialPort1.Write(TXdata, 0, 3)                    'Write byte array to serial port
-        Else
-            MsgBox("Please configure and open serial port to procede")      'Send user message box if no port connected
-        End If
-        Timer1.Enabled = True                                   'Enable timer when done
-
-    End Function
-
-
-
-    'Asynchronous Serial receive subroutine triggered by serial receive event
-    Private Sub DataReceived(sender As Object, e As EventArgs) Handles SerialPort1.DataReceived
-        receiveCount += 1                                           'Increment recieve byte counter
-        SerialPort1.Read(receiveByte, 0, 4)                         'Read serial buffer value
-
-        Select Case newData                                         'Test case to determine where to place info
-            Case = 0
-
-                dataIn1 = receiveByte(0)
-            Case = 1
-                dataIn2 = receiveByte(0)
-            Case = 2
-                dataIn3 = receiveByte(0)
-            Case = 3
-                dataIn4 = receiveByte(0)
-            Case = 4
-                dataIn5 = receiveByte(0)
-            Case = 5
-                dataIn6 = receiveByte(0)
-            Case = 6
-                dataIn7 = receiveByte(0)
-            Case = 7
-                dataIn8 = receiveByte(0)
-
-            Case Else
-                newData = 0                                             'Possible over flow, reset newData
-                Exit Sub
-
-        End Select
-        newData += 1                                                    'Increment newData once loop is complete
-    End Sub
-
-
-
-    'Sets com port and baud rate 
-    Sub ReadComPorts()
-        portState = False
-        Try
-            SerialPort1.BaudRate = ComPortComboBox.SelectedItem 'See if baud rate data is in the list box
-        Catch ex As Exception
-            SerialPort1.PortName = ComPortComboBox.SelectedItem 'Bot baud rate, save port name
-        End Try
-    End Sub
-
-    'Loads and reads settings file
-    Public Sub Load_setting()
-        drivePath = CurDir()
-        fileName = drivePath & "\ScopeSettings.txt"               'File found in debug folder of project
-        Try
-            FileOpen(1, fileName, OpenMode.Input)                 'Open file for read
-        Catch ex As Exception
-            MsgBox("Settings file not found, please go to settings menu") 'Alerts user if no file found
-            Exit Sub
-        End Try
-
-        Input(1, port)      'Load port name
-        Input(1, baud)      'Load baud rate
-
-        FileClose(1)
-
-        ComPortLabel.Text = port
-        BaudRateLabel.Text = baud
-    End Sub
-
-    'Set sample rate of timer
-    Sub SampleRate()
-        SampleRateComboBox.Items.Clear()
-        SampleRateComboBox.Items.Add(10)
-        SampleRateComboBox.Items.Add(100)
-        SampleRateComboBox.Items.Add(500)
-        SampleRateComboBox.Items.Add(1000)
-        SampleRateComboBox.Items.Add(5000)
-        SampleRateComboBox.Items.Add(10000)
-        SampleRateComboBox.Items.Add(60000)
-    End Sub
 
     'Selects com port when selected in combo box
     Private Sub ComPortComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComPortComboBox.SelectedIndexChanged
@@ -624,19 +635,7 @@ Public Class Form1
         drivePath = CurDir()
         fileName = drivePath & "\ScopeSettings.txt"             'File found in debug folder of project
 
-        BaudRateComboBox.Items.Clear()                          'Clear list box and load baud rate values
-        BaudRateComboBox.Items.Add(1200)
-        BaudRateComboBox.Items.Add(2400)
-        BaudRateComboBox.Items.Add(4800)
-        BaudRateComboBox.Items.Add(9600)
-        BaudRateComboBox.Items.Add(19200)
-        BaudRateComboBox.Items.Add(38400)
-        BaudRateComboBox.Items.Add(57600)
-        BaudRateComboBox.Items.Add(115200)
-        BaudRateComboBox.Items.Add(230400)
-        BaudRateComboBox.Items.Add(230400)
-        BaudRateComboBox.Items.Add(460800)
-        BaudRateComboBox.Items.Add(921600)
+        BaudRate()
 
 
         ComPortComboBox.Items.Clear()                                    'Clears past com ports
@@ -652,9 +651,12 @@ Public Class Form1
         SampleRate()
 
         DateDisplay()
+
+
         drivePath2 = CurDir()
-        Me.fileName2 = CurDir() & "\TemperatureData.txt" '& dateTemp & timeTemp & ".txt"
+        Me.fileName2 = CurDir() & "\TemperatureData" & dateTemp & ".txt"
     End Sub
+
 
     'Closes Serial Ports when forms closes
     Private Sub Form1_UnLoad()
@@ -668,9 +670,5 @@ Public Class Form1
     Private Sub QuitButton_Click(sender As Object, e As EventArgs) Handles QuitButton.Click
         Me.Close()
     End Sub
-
-
-
-
 
 End Class
