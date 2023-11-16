@@ -1,4 +1,9 @@
-﻿Public Class Form1
+﻿
+'Option Strict On
+'Option Explicit On
+
+
+Public Class Form1
 
     Public newX As Single
     Public newY As Single
@@ -38,9 +43,11 @@
     Public timerloop As Integer
     Sub CollectData()
         ' Dim i As Integer                'Sets index of array.
-        Dim loopCount As Integer        'Sets loop count of display loop.
+
         Dim recordLength As Integer
         Dim dataLength As Integer
+        ' Dim sensorIn As String
+
         'Populates array with 96 values  
         If AnIn1CheckBox.Checked = True Then
             If timerloop < 96 Then
@@ -57,7 +64,11 @@
         For i = 0 To dataLength
 
             If AnIn1CheckBox.Checked = True Then
-                data(i) = vOut * 10
+
+
+
+
+
                 'If timerloop < 96 Then
 
                 '    recordLength = timerloop
@@ -73,16 +84,37 @@
 
         Next
 
+        DisplayArray()
+
+    End Sub
+
+    Sub DisplayArray()
+        Dim loopCount As Integer        'Sets loop count of display loop.
+
+
+
         DataListBox.Items.Clear()                          'Clears listbox
 
         Do Until loopCount = 96 'recordLength 
-            DataListBox.Items.Add(Str(data(loopCount)))   'Displays array in listbox 
+            DataListBox.Items.Add(data(loopCount).ToString("n"))   'Displays array in listbox 
             loopCount = loopCount + 1
         Loop
 
         SaveFile()
-
     End Sub
+
+    Sub ShiftArray(newRead As Double)
+
+        For i = LBound(data) To UBound(data) - 1
+            data(i) = data(i + 1)
+        Next
+
+        data(95) = newRead
+    End Sub
+
+
+
+
 
     Sub MaxMin()
         Dim i As Integer
@@ -208,14 +240,16 @@
     End Sub
 
     Sub SaveFile()
+
+
         Try
-            FileOpen(1, fileName2, OpenMode.Append) 'Open file for Append
+            FileOpen(1, Me.fileName2, OpenMode.Append) 'Open file for Append
         Catch ex As Exception
 
         End Try
 
         For i = 0 To 95
-            WriteLine(1, data(i), dateTemp, timeTemp)
+            WriteLine(1, data(i) & dateTemp & timeTemp)
 
             ' WriteLine(1, " ")
         Next
@@ -234,7 +268,16 @@
 
 
     Private Sub DataButton_Click(sender As Object, e As EventArgs) Handles DataButton.Click
-        CollectData()
+        If AnIn1CheckBox.Checked = True Then
+            ' ShiftArray(newData)
+            'diplay array 
+            DisplayArray()
+
+        ElseIf AnIn1CheckBox.Checked = False Then
+            CollectData()
+        End If
+
+
     End Sub
 
     Private Sub MaxMinButton_Click(sender As Object, e As EventArgs) Handles MaxMinButton.Click
@@ -324,6 +367,9 @@
                 AnalogIn()
                 timerloop += 1                  'Increase timer loop for each tic of timer
                 'CollectData()
+                DisplayArray()
+                MaxMin()
+                Graph()
 
             End If
         End If
@@ -399,6 +445,9 @@
         n4 = 3.3 / 1023
         vPort = n4 * n3
         vOut = Format(vPort, "n")       'Calculated voltage at input
+
+        ShiftArray(vPort)
+
     End Sub
 
     'Sends byte array to serial port
@@ -472,6 +521,8 @@
 
         Input(1, port)      'Load port name
         Input(1, baud)      'Load baud rate
+
+        FileClose(1)
 
         ComPortLabel.Text = port
         BaudRateLabel.Text = baud
@@ -602,7 +653,7 @@
 
         DateDisplay()
         drivePath2 = CurDir()
-        fileName2 = CurDir() & "\TemperatureData.txt" '& dateTemp & timeTemp & ".txt"
+        Me.fileName2 = CurDir() & "\TemperatureData.txt" '& dateTemp & timeTemp & ".txt"
     End Sub
 
     'Closes Serial Ports when forms closes
